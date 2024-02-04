@@ -6,11 +6,11 @@
 #define INC_2024_I_AV_SW_RPI_BOARD_HPP
 
 #include "base_board.hpp"
-#include "rpi_data.hpp"
+#include "rpi_paths.hpp"
 
 class RpiBoard : public BaseBoard {
 protected:
-	RpiDataClass data;
+	RpiPathsClass data;
 	FSMState stateInit();
 	FSMState stateCalibration();
 	FSMState stateArmed();

@@ -7,10 +7,10 @@
 FSMState TeensyBoard::getNextState() {
 	FSMState nextState = INIT_STATE;
 
-	if (data.com.isUpdated()) {
-		TeensyCommandStatus com = data.get().com;
+	if (data.ctrl.isUpdated()) {
+		TeensyControlPathStatus com = data.get().ctrl;
 		nextState = executeCommand(com.cmdId, com.value);
-		data.com.reset();
+		data.ctrl.reset();
 	}
 
 	return nextState;

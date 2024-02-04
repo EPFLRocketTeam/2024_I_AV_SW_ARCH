@@ -8,10 +8,10 @@ FSMState RpiBoard::getNextState() {
 	FSMState currentState = sys.get().state;
 	FSMState nextState = INIT_STATE;
 
-	if (data.com.isUpdated()) {
-		RpiCommandStatus com = data.get().com;
+	if (data.ctrl.isUpdated()) {
+		RpiControlPathStatus com = data.get().ctrl;
 		nextState = executeCommand(com.cmdId, com.value);
-		data.com.reset();
+		data.ctrl.reset();
 	} else {
 		switch (currentState) {
 			case INIT_STATE:

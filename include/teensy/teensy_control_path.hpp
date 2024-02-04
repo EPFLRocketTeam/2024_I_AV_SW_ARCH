@@ -2,31 +2,28 @@
 // Created by Samuel on 04/02/2024.
 //
 
-#ifndef INC_2024_I_AV_SW_TEENSY_COMMAND_HPP
-#define INC_2024_I_AV_SW_TEENSY_COMMAND_HPP
+#ifndef INC_2024_I_AV_SW_TEENSY_CONTROL_PATH_HPP
+#define INC_2024_I_AV_SW_TEENSY_CONTROL_PATH_HPP
 
 #include <cstdint>
+#include "commands.hpp"
 
-enum TeensyCommandIDs {
-	TEENSY_CMD_NONE,
-	TEENSY_CMD_STATE
-};
-
-struct TeensyCommandStatus {
+struct TeensyControlPathStatus {
 	TeensyCommandIDs cmdId;
 	uint8_t value;
 };
 
-class TeensyCommandClass {
+class TeensyControlPathClass {
 protected:
 	TeensyCommandIDs cmdId = TEENSY_CMD_NONE;
 	TeensyCommandIDs lastCmdId = TEENSY_CMD_NONE;
 	uint8_t value = 0;
 public:
-	TeensyCommandStatus get();
+	TeensyControlPathStatus get();
 	void update();
 	void reset();
 	bool isUpdated();
+	void write_to_rpi();
 };
 
-#endif //INC_2024_I_AV_SW_TEENSY_COMMAND_HPP
+#endif //INC_2024_I_AV_SW_TEENSY_CONTROL_PATH_HPP

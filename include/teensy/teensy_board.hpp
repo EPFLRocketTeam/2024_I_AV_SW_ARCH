@@ -6,11 +6,11 @@
 #define INC_2024_I_AV_SW_TEENSY_BOARD_HPP
 
 #include "base_board.hpp"
-#include "teensy_data.hpp"
+#include "teensy_paths.hpp"
 
 class TeensyBoard : public BaseBoard {
 protected:
-	TeensyDataClass data;
+	TeensyPathsClass data;
 public:
 	FSMState getNextState() override;
 

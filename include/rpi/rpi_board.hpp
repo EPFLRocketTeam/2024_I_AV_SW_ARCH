@@ -5,12 +5,16 @@
 #ifndef INC_2024_I_AV_SW_RPI_BOARD_HPP
 #define INC_2024_I_AV_SW_RPI_BOARD_HPP
 
+#include "config.hpp"
 #include "base_board.hpp"
-#include "rpi_paths.hpp"
 
+template<class DataClass>
 class RpiBoard : public BaseBoard {
 protected:
-	RpiPathsClass data;
+	DataClass data;
+
+	FSMState executeCommand(RpiCommandID, uint8_t);
+
 	FSMState stateInit();
 	FSMState stateCalibration();
 	FSMState stateArmed();
@@ -23,8 +27,6 @@ protected:
 	FSMState stateDescent();
 	FSMState stateTouchdown();
 	FSMState stateAbort();
-
-	FSMState executeCommand(RpiCommandIDs, uint8_t);
 public:
 	FSMState getNextState() override;
 };

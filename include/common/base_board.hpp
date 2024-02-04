@@ -13,9 +13,11 @@ protected:
 	SystemClass sys;
 public:
 	void update();
-
 	virtual FSMState getNextState();
-	time_millis_t getCurrentTimeMillis();
+	virtual time_millis_t getCurrentTimeMillis();
+	virtual void compute();
+	virtual void output();
+
 };
 
 

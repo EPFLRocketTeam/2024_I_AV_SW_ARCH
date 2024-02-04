@@ -6,12 +6,18 @@
 #include "logger.hpp"
 
 void BaseBoard::update() {
-	sys.setTime(getCurrentTimeMillis());	// UPDATE TIME REF
-	sys.setState(getNextState());			// UPDATE FSM
-	/* TODO
-	 * Compute relevant things based on current state
-	 * Output bunch of shit
-	 */
+	sys.setTime(getCurrentTimeMillis());		// UPDATE TIME REF
+
+	FSMState prev = sys.get().state;
+	FSMState current = getNextState();
+
+	sys.setState(current);						// UPDATE FSM
+
+	if (prev != current)						// IF CHANGED STATE, UPDATE TRANSITION TIME
+		sys.setLastFsmTransition(getCurrentTimeMillis());
+
+	compute();
+	output();
 }
 
 FSMState BaseBoard::getNextState() {
@@ -19,7 +25,16 @@ FSMState BaseBoard::getNextState() {
 	return INIT_STATE;
 }
 
+
 time_millis_t BaseBoard::getCurrentTimeMillis() {
 	LOG("BaseBoard::getCurrentTimeMillis > OVERRIDE ME !");
 	return 0;
+}
+
+void BaseBoard::compute() {
+	LOG("BaseBoard::compute > OVERRIDE ME !");
+}
+
+void BaseBoard::output() {
+	LOG("BaseBoard::output > OVERRIDE ME !");
 }

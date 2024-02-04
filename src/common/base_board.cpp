@@ -16,10 +16,10 @@ void BaseBoard::update() {
 
 FSMState BaseBoard::getNextState() {
 	LOG("BaseBoard::getNextState > OVERRIDE ME !");
-	return ABORT_STATE;
+	return INIT_STATE;
 }
 
-time_t BaseBoard::getCurrentTimeMillis() {
+time_millis_t BaseBoard::getCurrentTimeMillis() {
 	LOG("BaseBoard::getCurrentTimeMillis > OVERRIDE ME !");
 	return 0;
 }

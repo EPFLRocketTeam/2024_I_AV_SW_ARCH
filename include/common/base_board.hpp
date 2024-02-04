@@ -15,7 +15,7 @@ public:
 	void update();
 
 	virtual FSMState getNextState();
-	time_t getCurrentTimeMillis();
+	time_millis_t getCurrentTimeMillis();
 };
 
 

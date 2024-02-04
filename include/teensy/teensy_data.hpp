@@ -14,11 +14,11 @@ struct TeensyDataStatus {
 };
 
 class TeensyDataClass {
-protected:
-	TeensyCommandClass com;
-	TeensyOutputClass out;
 public:
 	TeensyDataStatus get();
+
+	TeensyCommandClass com;
+	TeensyOutputClass out;
 };
 
 #endif //INC_2024_I_AV_SW_TEENSY_DATA_HPP

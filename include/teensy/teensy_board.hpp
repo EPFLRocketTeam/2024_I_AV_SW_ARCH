@@ -13,6 +13,8 @@ protected:
 	TeensyDataClass data;
 public:
 	FSMState getNextState() override;
+
+	FSMState executeCommand(TeensyCommandIDs id, uint8_t value);
 };
 
 

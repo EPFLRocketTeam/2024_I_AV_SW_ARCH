@@ -15,10 +15,12 @@ struct RpiDataStruct {
 
 class RpiDataClass {
 protected:
-	RpiCommandClass com;
-	RpiOutputClass out;
+
 public:
 	RpiDataStruct get();
+
+	RpiCommandClass com;
+	RpiOutputClass out;
 };
 
 

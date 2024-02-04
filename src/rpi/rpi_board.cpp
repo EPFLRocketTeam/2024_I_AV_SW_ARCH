@@ -6,47 +6,52 @@
 
 FSMState RpiBoard::getNextState() {
 	FSMState currentState = sys.get().state;
-	FSMState nextState = ABORT_STATE;
+	FSMState nextState = INIT_STATE;
 
-	switch (currentState) {
-		case INIT_STATE:
-			nextState = stateInit();
-			break;
-		case CALIBRATION_STATE:
-			nextState = stateCalibration();
-			break;
-		case ARMED_STATE:
-			nextState = stateArmed();
-			break;
-		case PRESSURIZE_STATE:
-			nextState = statePressurized();
-			break;
-		case FLIGHTREADY_STATE:
-			nextState = stateFlightStateReady();
-			break;
-		case IGNITE_STATE:
-			nextState = stateIgnite();
-			break;
-		case IGNITION_STATE:
-			nextState = stateIgnition();
-			break;
-		case ASCENT_STATE:
-			nextState = stateAscent();
-			break;
-		case HOVERING_STATE:
-			nextState = stateHovering();
-			break;
-		case DESCENT_STATE:
-			nextState = stateDescent();
-			break;
-		case TOUCHDOWN_STATE:
-			nextState = stateTouchdown();
-			break;
-		case ABORT_STATE:
-			nextState = stateAbort();
-			break;
+	if (data.com.isUpdated()) {
+		RpiCommandStatus com = data.get().com;
+		nextState = executeCommand(com.cmdId, com.value);
+		data.com.reset();
+	} else {
+		switch (currentState) {
+			case INIT_STATE:
+				nextState = stateInit();
+				break;
+			case CALIBRATION_STATE:
+				nextState = stateCalibration();
+				break;
+			case ARMED_STATE:
+				nextState = stateArmed();
+				break;
+			case PRESSURIZE_STATE:
+				nextState = statePressurized();
+				break;
+			case FLIGHTREADY_STATE:
+				nextState = stateFlightStateReady();
+				break;
+			case IGNITE_STATE:
+				nextState = stateIgnite();
+				break;
+			case IGNITION_STATE:
+				nextState = stateIgnition();
+				break;
+			case ASCENT_STATE:
+				nextState = stateAscent();
+				break;
+			case HOVERING_STATE:
+				nextState = stateHovering();
+				break;
+			case DESCENT_STATE:
+				nextState = stateDescent();
+				break;
+			case TOUCHDOWN_STATE:
+				nextState = stateTouchdown();
+				break;
+			case ABORT_STATE:
+				nextState = stateAbort();
+				break;
+		}
 	}
-
 	if(nextState != currentState)
 		sys.setLastFsmTransition(getCurrentTimeMillis());
 
@@ -111,6 +116,11 @@ FSMState RpiBoard::stateTouchdown() {
 FSMState RpiBoard::stateAbort() {
 	LOG("RpiBoard::stateAbort > OVERRIDE ME !!");
 	return ABORT_STATE;
+}
+
+FSMState RpiBoard::executeCommand(RpiCommandIDs id, uint8_t value) {
+	LOG("RpiBoard::executeCommand > OVERRIDE ME !!");
+	return sys.get().state;
 }
 
 

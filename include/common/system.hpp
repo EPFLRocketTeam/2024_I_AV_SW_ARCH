@@ -8,25 +8,25 @@
 #include "fsm.hpp"
 #include <cstdint>
 
-typedef uint32_t time_t;
+typedef uint32_t time_millis_t;
 
 struct SystemStatus {
-	time_t time;
-	time_t lastFSMTransition;
+	time_millis_t time;
+	time_millis_t lastFSMTransition;
 	FSMState state;
 	bool initialized;
 };
 
 class SystemClass {
 private:
-	time_t time;
-	time_t lastFSMTransition;
+	time_millis_t time;
+	time_millis_t lastFSMTransition;
 	FSMState state;
 	bool initialized;
 public:
 	SystemStatus get();
-	void setTime(time_t);
-	void setLastFsmTransition(time_t);
+	void setTime(time_millis_t);
+	void setLastFsmTransition(time_millis_t);
 	void setState(FSMState);
 	void setInitialized(bool);
 };

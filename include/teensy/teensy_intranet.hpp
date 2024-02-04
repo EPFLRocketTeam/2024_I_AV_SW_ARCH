@@ -5,19 +5,15 @@
 #ifndef INC_2024_I_AV_SW_TEENSY_INTRANET_HPP
 #define INC_2024_I_AV_SW_TEENSY_INTRANET_HPP
 
-#include "data/base_intranet.hpp"
-#include "config.hpp"
 #include "modifier/command_receiver.hpp"
+#include "modifier/data_component.hpp"
 
-struct TeensyIntranetStatus {
-	CommandID comId;
-	uint8_t comVal;
-};
+#define INTRANET_TEMPLATE template<typename> class IntranetClass, typename IntranetStatus
+#define INTRANET_WILDCARD IntranetClass, IntranetStatus
 
-class TeensyIntranetClass : public CommandReceiver {
-public:
-	virtual TeensyIntranetStatus get();
-	virtual void compute();
+template<typename IntranetStatus>
+class TeensyIntranetClass : public DataComponent<IntranetStatus>, public CommandReceiver {
+
 };
 
 #endif //INC_2024_I_AV_SW_TEENSY_INTRANET_HPP

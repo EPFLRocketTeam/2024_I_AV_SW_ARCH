@@ -5,6 +5,8 @@
 #ifndef INC_2024_I_AV_SW_RPI_DATA_HPP
 #define INC_2024_I_AV_SW_RPI_DATA_HPP
 
+#include "rpi_intranet.hpp"
+#include "rpi_telecom.hpp"
 
 template<typename IntranetStatus, typename TelecomStatus>
 struct DataStatus {
@@ -12,13 +14,14 @@ struct DataStatus {
 	TelecomStatus tele;
 };
 
-template<class IntranetClass, typename IntranetStatus, class TelecomClass, typename TelecomStatus>
+template<INTRANET_TEMPLATE, TELECOM_TEMPLATE>
 class RpiDataClass {
 protected:
 
 public:
-	IntranetClass intra;
-	TelecomClass tele;
+	explicit RpiDataClass();
+	IntranetClass<IntranetStatus> intra;
+	TelecomClass<TelecomStatus> tele;
 
 	DataStatus<IntranetStatus, TelecomStatus> get();
 	virtual void compute();

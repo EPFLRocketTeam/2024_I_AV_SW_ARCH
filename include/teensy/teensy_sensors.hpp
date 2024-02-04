@@ -5,14 +5,13 @@
 #ifndef INC_2024_I_AV_SW_TEENSY_SENSORS_HPP
 #define INC_2024_I_AV_SW_TEENSY_SENSORS_HPP
 
-struct TeensySensorsStatus {
+#include "modifier/data_component.hpp"
 
-};
+#define SENSORS_TEMPLATE template<typename> class SensorsClass, typename SensorsStatus
+#define SENSORS_WILDCARD SensorsClass, SensorsStatus
 
-class TeensySensorsClass {
-public:
-	virtual TeensySensorsStatus get();
-	virtual void compute();
+template <typename SensorsStatus>
+class TeensySensorsClass : public DataComponent<SensorsStatus> {
 
 };
 

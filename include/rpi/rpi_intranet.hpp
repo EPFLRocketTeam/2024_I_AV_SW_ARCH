@@ -5,14 +5,15 @@
 #ifndef INC_2024_I_AV_SW_RPI_INTRANET_HPP
 #define INC_2024_I_AV_SW_RPI_INTRANET_HPP
 
-struct RpiIntranetStatus {
+#include "modifier/data_component.hpp"
 
-};
+#define INTRANET_TEMPLATE template<typename> class IntranetClass, typename IntranetStatus
+#define INTRANET_WILDCARD IntranetClass, IntranetStatus
 
-class RpiIntranetClass {
+template<typename IntranetStatus>
+class RpiIntranetClass : public DataComponent<IntranetStatus> {
 public:
-	virtual RpiIntranetStatus get();
-	virtual void compute();
+
 };
 
 

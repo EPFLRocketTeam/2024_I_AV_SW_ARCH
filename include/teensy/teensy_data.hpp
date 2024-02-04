@@ -5,20 +5,21 @@
 #ifndef INC_2024_I_AV_SW_TEENSY_DATA_HPP
 #define INC_2024_I_AV_SW_TEENSY_DATA_HPP
 
+#include "teensy_intranet.hpp"
+#include "teensy_sensors.hpp"
+
 template<typename IntranetStatus, typename SensorsStatus>
 struct DataStatus {
 	IntranetStatus intra;
 	SensorsStatus sens;
 };
 
-template<class IntranetClass, typename IntranetStatus, class SensorsClass, typename SensorsStatus>
+template<INTRANET_TEMPLATE, SENSORS_TEMPLATE>
 class TeensyDataClass {
-protected:
-
-
 public:
-	IntranetClass intra;
-	SensorsClass sens;
+	explicit TeensyDataClass();
+	IntranetClass<IntranetStatus> intra;
+	SensorsClass<SensorsStatus> sens;
 
 	DataStatus<IntranetStatus, SensorsStatus> get();
 	virtual void compute();

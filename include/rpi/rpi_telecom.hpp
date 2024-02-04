@@ -7,17 +7,16 @@
 
 #include "config.hpp"
 #include "modifier/command_receiver.hpp"
+#include "modifier/data_component.hpp"
 
-struct RpiTelecomStatus {
-	CommandID comId;
-	uint8_t comVal;
-};
+#define TELECOM_TEMPLATE template<typename> class TelecomClass, typename TelecomStatus
+#define TELECOM_WILDCARD TelecomClass, TelecomStatus
 
-class RpiTelecomClass : public CommandReceiver {
+template<typename TelecomStatus>
+class RpiTelecomClass : public DataComponent<TelecomStatus>, public CommandReceiver {
 protected:
 public:
-	virtual RpiTelecomStatus get();
-	virtual void compute();
+
 };
 
 #endif //INC_2024_I_AV_SW_RPI_TELECOM_HPP

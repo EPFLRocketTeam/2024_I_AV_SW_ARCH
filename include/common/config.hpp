@@ -12,5 +12,18 @@ enum CommandID: uint8_t {
 	CMD_STATE = 0x01,
 };
 
+typedef double scalar;
+
+struct Vect3 {
+	scalar x;
+	scalar y;
+	scalar z;
+};
+
+struct Quaternion {
+	scalar s;
+	Vect3 v;
+};
+
 
 #endif //INC_2024_I_AV_SW_CONFIG_HPP

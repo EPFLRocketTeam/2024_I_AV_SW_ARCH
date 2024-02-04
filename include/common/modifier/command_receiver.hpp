@@ -5,17 +5,16 @@
 #ifndef INC_2024_I_AV_SW_COMMAND_RECEIVER_HPP
 #define INC_2024_I_AV_SW_COMMAND_RECEIVER_HPP
 
-#include <cstdint>
+#include "config.hpp"
 
-template<typename CommandIDs>
 class CommandReceiver {
 protected:
-	CommandIDs comId = 0;
-	CommandIDs lastComId = 0;
+	CommandID comId = CMD_NONE;
+	CommandID lastComId = CMD_NONE;
 	uint8_t comVal = 0;
 public:
 	bool isCommandUpdated();
-	bool isCommand(CommandIDs id);
+	bool isCommand(CommandID id);
 	void resetCommand();
 };
 

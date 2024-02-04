@@ -9,11 +9,11 @@
 #include "modifier/command_receiver.hpp"
 
 struct RpiTelecomStatus {
-	RpiCommandID comId;
+	CommandID comId;
 	uint8_t comVal;
 };
 
-class RpiTelecomClass : public CommandReceiver<RpiCommandID> {
+class RpiTelecomClass : public CommandReceiver {
 protected:
 public:
 	virtual RpiTelecomStatus get();

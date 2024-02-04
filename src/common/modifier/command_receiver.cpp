@@ -4,19 +4,16 @@
 
 #include "modifier/command_receiver.hpp"
 
-template<typename CommandIDs>
-bool CommandReceiver<CommandIDs>::isCommandUpdated() {
+bool CommandReceiver::isCommandUpdated() {
 	return comId != lastComId;
 }
 
-template<typename CommandIDs>
-bool CommandReceiver<CommandIDs>::isCommand(CommandIDs id) {
+bool CommandReceiver::isCommand(CommandID id) {
 	return comId = id;
 }
 
-template<typename CommandIDs>
-void CommandReceiver<CommandIDs>::resetCommand() {
-	comId = 0;
-	lastComId = 0;
+void CommandReceiver::resetCommand() {
+	comId = CMD_NONE;
+	lastComId = CMD_NONE;
 	comVal = 0;
 }

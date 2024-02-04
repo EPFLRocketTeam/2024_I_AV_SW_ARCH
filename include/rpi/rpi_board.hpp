@@ -9,7 +9,7 @@
 #include "base_board.hpp"
 
 template<class DataClass>
-class RpiBoard : public BaseBoard {
+class RpiBoard : public BaseBoard{
 protected:
 	DataClass data;
 

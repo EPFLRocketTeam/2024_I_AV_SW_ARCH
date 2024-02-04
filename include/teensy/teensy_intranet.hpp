@@ -10,11 +10,11 @@
 #include "modifier/command_receiver.hpp"
 
 struct TeensyIntranetStatus {
-	TeensyCommandID comId;
+	CommandID comId;
 	uint8_t comVal;
 };
 
-class TeensyIntranetClass : public CommandReceiver<TeensyCommandID> {
+class TeensyIntranetClass : public CommandReceiver {
 public:
 	virtual TeensyIntranetStatus get();
 	virtual void compute();

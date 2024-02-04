@@ -7,14 +7,9 @@
 
 #include <cstdint>
 
-enum TeensyCommandID: uint8_t {
-	TEENSY_CMD_NONE = 0x00,
-	TEENSY_CMD_STATE = 0x01,
-};
-
-enum RpiCommandID: uint8_t {
-	RPI_CMD_NONE = 0x00,
-	RPI_CMD_STATE = 0x01,
+enum CommandID: uint8_t {
+	CMD_NONE = 0x00,
+	CMD_STATE = 0x01,
 };
 
 

@@ -13,7 +13,7 @@ class RpiBoard : public BaseBoard {
 protected:
 	DataClass data;
 
-	FSMState executeCommand(RpiCommandID, uint8_t);
+	FSMState onCommand(CommandID, uint8_t);
 
 	FSMState stateInit();
 	FSMState stateCalibration();

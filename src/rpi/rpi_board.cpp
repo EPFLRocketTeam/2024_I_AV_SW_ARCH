@@ -7,7 +7,7 @@
 template<class DataClass>
 FSMState RpiBoard<DataClass>::getNextState() {
 
-	if(data.tele.isCommandUpdated() && data.tele.isCommand(TEENSY_CMD_STATE)){
+	if(data.tele.isCommandUpdated() && data.tele.isCommand(CMD_STATE)){
 		auto nextState = (FSMState) data.get().tele.comId;
 		data.tele.resetCommand();
 		return nextState;
@@ -42,8 +42,8 @@ FSMState RpiBoard<DataClass>::getNextState() {
 }
 
 template<class DataClass>
-FSMState RpiBoard<DataClass>::executeCommand(RpiCommandID, uint8_t) {
-	LOG("RpiBoard::executeCommand > OVERRIDE ME !");
+FSMState RpiBoard<DataClass>::onCommand(CommandID, uint8_t) {
+	LOG("RpiBoard::onCommand > OVERRIDE ME !");
 	return INIT_STATE;
 }
 

@@ -5,13 +5,10 @@
 #ifndef INC_2024_I_AV_SW_RPI_INTRANET_HPP
 #define INC_2024_I_AV_SW_RPI_INTRANET_HPP
 
-#include "modifier/data_component.hpp"
-
-#define INTRANET_TEMPLATE template<typename> class IntranetClass, typename IntranetStatus
-#define INTRANET_WILDCARD IntranetClass, IntranetStatus
+#include "core/data/base_intranet.hpp"
 
 template<typename IntranetStatus>
-class RpiIntranetClass : public DataComponent<IntranetStatus> {
+class RpiIntranetClass : public BaseIntranet<IntranetStatus> {
 public:
 
 };

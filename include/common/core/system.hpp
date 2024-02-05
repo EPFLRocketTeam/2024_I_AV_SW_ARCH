@@ -5,10 +5,8 @@
 #ifndef INC_2024_I_AV_SW_SYSTEM_HPP
 #define INC_2024_I_AV_SW_SYSTEM_HPP
 
-#include "fsm.hpp"
-#include <cstdint>
-
-typedef uint32_t time_millis_t;
+#include "core/fsm.hpp"
+#include "types.hpp"
 
 struct SystemStatus {
 	time_millis_t time;																	// TIME REF (beginning of each cycle)

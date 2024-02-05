@@ -1,29 +1,23 @@
 //
-// Created by Samuel on 04/02/2024.
+// Created by Samuel on 05/02/2024.
 //
 
 #ifndef INC_2024_I_AV_SW_CONFIG_HPP
 #define INC_2024_I_AV_SW_CONFIG_HPP
 
-#include <cstdint>
+#define SENS_ACCEL_AMNT 3
+#define SENS_ACCEL_RATE 100
 
-enum CommandID: uint8_t {
-	CMD_NONE = 0x00,
-	CMD_STATE = 0x01,
-};
+#define SENS_GYRO_AMNT 3
+#define SENS_GYRO_RATE 100
 
-typedef double scalar;
+#define SENS_MAG_AMNT 3
+#define SENS_MAG_RATE 20
 
-struct Vect3 {
-	scalar x;
-	scalar y;
-	scalar z;
-};
+#define SENS_BARO_AMNT 3
+#define SENS_BARO_RATE 100
 
-struct Quaternion {
-	scalar s;
-	Vect3 v;
-};
-
+#define SENS_GNSS_AMNT 1
+#define SENS_GNSS_RATE 10
 
 #endif //INC_2024_I_AV_SW_CONFIG_HPP

@@ -2,10 +2,10 @@
 // Created by Samuel on 04/02/2024.
 //
 
-#include "base_board.hpp"
+#include "core/base_board.hpp"
 #include "logger.hpp"
 
-void BaseBoard::update() {
+void BaseBoardClass::loopOnce() {
 	sys.setTime(getCurrentTimeMillis());												// UPDATE TIME REF
 	sys.setUpdated(false);
 
@@ -18,25 +18,25 @@ void BaseBoard::update() {
 		sys.setUpdated(true);    														// RAISE FLAG
 	}
 
-	compute();
+	update();
 	output();
 }
 
-FSMState BaseBoard::getNextState() {
-	LOG("BaseBoard::getNextState > OVERRIDE ME !");
-	return INIT_STATE;
+FSMState BaseBoardClass::getNextState() {
+	LOG("BaseBoardClass::getNextState > OVERRIDE ME !");
+	return sys.get().state;
 }
 
 
-time_millis_t BaseBoard::getCurrentTimeMillis() {
-	LOG("BaseBoard::getCurrentTimeMillis > OVERRIDE ME !");
+time_millis_t BaseBoardClass::getCurrentTimeMillis() {
+	LOG("BaseBoardClass::getCurrentTimeMillis > OVERRIDE ME !");
 	return 0;
 }
 
-void BaseBoard::compute() {
-	LOG("BaseBoard::compute > OVERRIDE ME !");
+void BaseBoardClass::update() {
+	LOG("BaseBoardClass::loopOnce > OVERRIDE ME !");
 }
 
-void BaseBoard::output() {
-	LOG("BaseBoard::output > OVERRIDE ME !");
+void BaseBoardClass::output() {
+	LOG("BaseBoardClass::output > OVERRIDE ME !");
 }

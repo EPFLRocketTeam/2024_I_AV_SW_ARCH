@@ -6,18 +6,17 @@
 #define INC_2024_I_AV_SW_BASE_BOARD_HPP
 
 
-#include "system.hpp"
+#include "core/system.hpp"
 
-class BaseBoard {
+class BaseBoardClass{
 protected:
-	SystemClass sys;
+	SystemClass sys{};
 public:
-	void update();
-	virtual FSMState getNextState();
+	void loopOnce();
 	virtual time_millis_t getCurrentTimeMillis();
-	virtual void compute();
+	virtual FSMState getNextState();
+	virtual void update();
 	virtual void output();
-
 };
 
 

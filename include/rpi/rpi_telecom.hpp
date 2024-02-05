@@ -5,17 +5,12 @@
 #ifndef INC_2024_I_AV_SW_RPI_TELECOM_HPP
 #define INC_2024_I_AV_SW_RPI_TELECOM_HPP
 
-#include "config.hpp"
+#include "types.hpp"
+#include "core/data/base_data_component.hpp"
 #include "modifier/command_handler.hpp"
-#include "modifier/data_component.hpp"
-
-#define TELECOM_TEMPLATE template<typename> class TelecomClass, typename TelecomStatus
-#define TELECOM_WILDCARD TelecomClass, TelecomStatus
 
 template<typename TelecomStatus>
-class RpiTelecomClass : public DataComponent<TelecomStatus>, public CommandHandler {
-protected:
-public:
+class RpiTelecomClass : public BaseDataComponent<TelecomStatus>, public CommandHandler {
 
 };
 

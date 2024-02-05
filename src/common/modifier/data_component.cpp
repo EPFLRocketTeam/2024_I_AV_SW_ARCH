@@ -12,6 +12,6 @@ Status DataComponent<Status>::get() {
 }
 
 template <typename Status>
-void DataComponent<Status>::compute() {
+void DataComponent<Status>::compute(SystemStatus sys) {
 	LOG("DataComponent::compute > OVERRIDE ME !");
 }

@@ -12,7 +12,10 @@
 
 template <typename SensorsStatus>
 class TeensySensorsClass : public DataComponent<SensorsStatus> {
-
+public:
+	void compute(SystemStatus) override;
+	void fetchData();
+	void calibrate();
 };
 
 

@@ -2,17 +2,17 @@
 // Created by Samuel on 04/02/2024.
 //
 
-#include "modifier/command_receiver.hpp"
+#include "modifier/command_handler.hpp"
 
-bool CommandReceiver::isCommandUpdated() {
+bool CommandHandler::isCommandUpdated() {
 	return comId != lastComId;
 }
 
-bool CommandReceiver::isCommand(CommandID id) {
+bool CommandHandler::isCommand(CommandID id) {
 	return comId = id;
 }
 
-void CommandReceiver::resetCommand() {
+void CommandHandler::resetCommand() {
 	comId = CMD_NONE;
 	lastComId = CMD_NONE;
 	comVal = 0;

@@ -118,7 +118,3 @@ FSMState RpiBoard<DataClass>::stateAbort() {
 	LOG("RpiBoard::stateAbort > OVERRIDE ME !");
 	return ABORT_STATE;
 }
-
-
-
-

@@ -6,15 +6,17 @@
 #include "logger.hpp"
 
 void BaseBoard::update() {
-	sys.setTime(getCurrentTimeMillis());		// UPDATE TIME REF
+	sys.setTime(getCurrentTimeMillis());												// UPDATE TIME REF
+	sys.setUpdated(false);
 
 	FSMState prev = sys.get().state;
 	FSMState current = getNextState();
+	sys.setState(current);																// UPDATE FSM
 
-	sys.setState(current);						// UPDATE FSM
-
-	if (prev != current)						// IF CHANGED STATE, UPDATE TRANSITION TIME
-		sys.setLastFsmTransition(getCurrentTimeMillis());
+	if (prev != current) {                    											// IF CHANGED STATE
+		sys.setLastFsmTransition(getCurrentTimeMillis());    							// UPDATE TRANSITION TIME
+		sys.setUpdated(true);    														// RAISE FLAG
+	}
 
 	compute();
 	output();

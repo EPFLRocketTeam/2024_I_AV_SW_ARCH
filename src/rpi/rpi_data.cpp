@@ -11,7 +11,6 @@ RpiDataClass<INTRANET_WILDCARD, TELECOM_WILDCARD>::RpiDataClass() {
 	static_assert(std::is_base_of<RpiTelecomClass<TelecomStatus>, TelecomClass<TelecomStatus>>::value, "TelecomClass must be a subclass fo RpiTelecomClass");
 }
 
-
 template<INTRANET_TEMPLATE, TELECOM_TEMPLATE>
 DataStatus<IntranetStatus, TelecomStatus> RpiDataClass<INTRANET_WILDCARD, TELECOM_WILDCARD>::get() {
 	return {

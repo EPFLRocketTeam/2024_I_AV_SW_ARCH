@@ -9,7 +9,8 @@ SystemStatus SystemClass::get() {
 		.time = time,
 		.lastFSMTransition = lastFSMTransition,
 		.state = state,
-		.initialized = initialized,
+		.initCheckComplete = initCheckComplete,
+		.updated = updated,
 	};
 }
 
@@ -25,6 +26,10 @@ void SystemClass::setState(FSMState stateIn) {
 	state = stateIn;
 }
 
-void SystemClass::setInitialized(bool initializedIn) {
-	initialized = initializedIn;
+void SystemClass::setInitCheckComplete(bool initCheckCompleteIn) {
+	initCheckComplete = initCheckCompleteIn;
+}
+
+void SystemClass::setUpdated(bool updatedIn) {
+	updated = updatedIn;
 }

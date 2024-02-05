@@ -5,14 +5,14 @@
 #ifndef INC_2024_I_AV_SW_TEENSY_INTRANET_HPP
 #define INC_2024_I_AV_SW_TEENSY_INTRANET_HPP
 
-#include "modifier/command_receiver.hpp"
+#include "modifier/command_handler.hpp"
 #include "modifier/data_component.hpp"
 
 #define INTRANET_TEMPLATE template<typename> class IntranetClass, typename IntranetStatus
 #define INTRANET_WILDCARD IntranetClass, IntranetStatus
 
 template<typename IntranetStatus>
-class TeensyIntranetClass : public DataComponent<IntranetStatus>, public CommandReceiver {
+class TeensyIntranetClass : public DataComponent<IntranetStatus>, public CommandHandler {
 
 };
 

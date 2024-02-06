@@ -12,27 +12,28 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -ggdb")
 add_library(2024_I_AV_SW_COMMON include/common/core/system.hpp src/common/core/system.cpp include/common/core/fsm.hpp include/common/logger.hpp src/common/core/base_board.cpp include/common/core/base_board.hpp include/common/modifier/command_handler.hpp src/common/modifier/command_handler.cpp include/common/types.hpp include/common/core/data/base_data_component.hpp include/common/core/data/base_intranet.hpp include/common/config.hpp)
 target_include_directories(2024_I_AV_SW_COMMON PUBLIC include/common)
 
+# Library for the RPI
+add_library(2024_I_AV_SW_RPI include/rpi/base_rpi_board.hpp include/rpi/rpi_intranet.hpp)
+target_link_libraries(2024_I_AV_SW_RPI PUBLIC 2024_I_AV_SW_COMMON)
+target_include_directories(2024_I_AV_SW_RPI PUBLIC include/rpi)
+
 # Library for the Teensy
-add_library(2024_I_AV_SW_TEENSY include/teensy/base_teensy_board.hpp include/teensy/teensy_intranet.hpp include/teensy/teensy_sensors.hpp)
+add_library(2024_I_AV_SW_TEENSY include/teensy/base_teensy_board.hpp include/teensy/teensy_intranet.hpp include/teensy/teensy_telecom.hpp include/teensy/teensy_sensors.hpp)
 target_link_libraries(2024_I_AV_SW_TEENSY PUBLIC 2024_I_AV_SW_COMMON)
 target_include_directories(2024_I_AV_SW_TEENSY PUBLIC include/teensy)
 
-# Library for the RPI
-add_library(2024_I_AV_SW_RPI include/rpi/rpi_intranet.hpp include/rpi/rpi_telecom.hpp include/rpi/base_rpi_board.hpp include/rpi/base_rpi_board.hpp)
-target_link_libraries(2024_I_AV_SW_RPI PUBLIC 2024_I_AV_SW_COMMON)
-target_include_directories(2024_I_AV_SW_RPI PUBLIC include/rpi)
 
 # Defining tests
 enable_testing()
 
-add_executable(CREATE_RPI_BOARD_TEST test/create_rpi_board_test.cpp)
-target_link_libraries(CREATE_RPI_BOARD_TEST PUBLIC 2024_I_AV_SW_RPI)
+add_executable(DEMO_TEENSY_MASTER test/demo_teensy_master.cpp)
+target_link_libraries(DEMO_TEENSY_MASTER PUBLIC 2024_I_AV_SW_TEENSY)
 
-add_test(NAME CREATE_RPI_BOARD_TEST COMMAND $<TARGET_FILE:CREATE_RPI_BOARD_TEST>)
-set_tests_properties(CREATE_RPI_BOARD_TEST PROPERTIES TIMEOUT 5)
+add_test(NAME DEMO_TEENSY_MASTER COMMAND $<TARGET_FILE:DEMO_TEENSY_MASTER>)
+set_tests_properties(DEMO_TEENSY_MASTER PROPERTIES TIMEOUT 5)
 
-add_executable(CREATE_TEENSY_BOARD_TEST test/create_teensy_board_test.cpp)
-target_link_libraries(CREATE_TEENSY_BOARD_TEST PUBLIC 2024_I_AV_SW_TEENSY)
+add_executable(DEMO_RPI_SLAVE test/demo_rpi_slave.cpp)
+target_link_libraries(DEMO_RPI_SLAVE PUBLIC 2024_I_AV_SW_RPI)
 
-add_test(NAME CREATE_TEENSY_BOARD_TEST COMMAND $<TARGET_FILE:CREATE_TEENSY_BOARD_TEST>)
-set_tests_properties(CREATE_TEENSY_BOARD_TEST PROPERTIES TIMEOUT 5)
+add_test(NAME DEMO_RPI_SLAVE COMMAND $<TARGET_FILE:DEMO_RPI_SLAVE>)
+set_tests_properties(DEMO_RPI_SLAVE PROPERTIES TIMEOUT 5)

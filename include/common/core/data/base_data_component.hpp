@@ -17,7 +17,7 @@ public:
 	}
 
 	virtual void update(SystemStatus) {
-		LOG("DataComponent::loopOnce > OVERRIDE ME !");
+		LOG("DataComponent::update > OVERRIDE ME !");
 	}
 };
 

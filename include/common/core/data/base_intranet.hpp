@@ -11,8 +11,8 @@
 template<typename Status>
 class BaseIntranet : BaseDataComponent<Status> {
 public:
-	virtual void write_to(uint8_t) {
-		LOG("BaseIntranet::write > OVERRIDE ME !");
+	virtual void write_to(uint8_t board) {
+		LOG("BaseIntranet::write_to > OVERRIDE ME !");
 	}
 };
 

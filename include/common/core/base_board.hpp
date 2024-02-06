@@ -8,7 +8,7 @@
 
 #include "core/system.hpp"
 
-class BaseBoardClass{
+class BaseBoardClass {
 protected:
 	SystemClass sys{};
 public:
@@ -17,6 +17,7 @@ public:
 	virtual FSMState getNextState();
 	virtual void update();
 	virtual void output();
+	virtual void init();
 };
 
 

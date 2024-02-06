@@ -6,9 +6,13 @@
 #define INC_2024_I_AV_SW_RPI_INTRANET_HPP
 
 #include "core/data/base_intranet.hpp"
+#include "modifier/command_handler.hpp"
 
+/**
+ * Template interface for the RPI's intranet connection.
+ */
 template<typename IntranetStatus>
-class RpiIntranetClass : public BaseIntranet<IntranetStatus> {
+class RpiIntranetClass : public BaseIntranet<IntranetStatus>, public CommandHandler {
 public:
 
 };

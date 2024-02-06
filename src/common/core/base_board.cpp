@@ -34,9 +34,13 @@ time_millis_t BaseBoardClass::getCurrentTimeMillis() {
 }
 
 void BaseBoardClass::update() {
-	LOG("BaseBoardClass::loopOnce > OVERRIDE ME !");
+	LOG("BaseBoardClass::update > OVERRIDE ME !");
 }
 
 void BaseBoardClass::output() {
 	LOG("BaseBoardClass::output > OVERRIDE ME !");
+}
+
+void BaseBoardClass::init() {
+	LOG("BaseBoardClass::init > OVERRIDE ME !");
 }

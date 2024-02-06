@@ -7,7 +7,7 @@
 
 void BaseBoardClass::loopOnce() {
 	sys.setTime(getCurrentTimeMillis());												// UPDATE TIME REF
-	sys.setUpdated(false);
+	sys.setStateUpdated(false);
 
 	FSMState prev = sys.get().state;
 	FSMState current = getNextState();
@@ -15,8 +15,10 @@ void BaseBoardClass::loopOnce() {
 
 	if (prev != current) {                    											// IF CHANGED STATE
 		sys.setLastFsmTransition(getCurrentTimeMillis());    							// UPDATE TRANSITION TIME
-		sys.setUpdated(true);    														// RAISE FLAG
+		sys.setStateUpdated(true);    													// RAISE FLAG
 	}
+
+	sys.setInFlight(current != INIT_STATE && current != CALIBRATION_STATE);				// AS SOON AS ARMED, CONSIDERED IN FLIGHT
 
 	update();
 	output();

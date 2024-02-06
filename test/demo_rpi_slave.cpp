@@ -34,12 +34,17 @@ public:
 
 class Board : public BaseRpiBoardClass<Intranet> {
 public:
+	void init() override {
+		sys.setStateUpdated(true); // Simple example, don't worry about this yet
+	}
+
 	void update() override {
 		SystemStatus sysStatus = sys.get();
 		intra.update(sysStatus);
 	}
 
 	void output() override {
+		std::cout << "INTRA OK ?" << intra.get().ok_intra << std::endl;
 		intra.write_to(0);
 	}
 };

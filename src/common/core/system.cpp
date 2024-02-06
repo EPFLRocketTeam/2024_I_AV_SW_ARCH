@@ -10,7 +10,8 @@ SystemStatus SystemClass::get() {
 		.lastFSMTransition = lastFSMTransition,
 		.state = state,
 		.initCheckComplete = initCheckComplete,
-		.updated = updated,
+		.stateUpdated = stateUpdated,
+		.inFlight = inFlight,
 	};
 }
 
@@ -30,6 +31,10 @@ void SystemClass::setInitCheckComplete(bool initCheckCompleteIn) {
 	initCheckComplete = initCheckCompleteIn;
 }
 
-void SystemClass::setUpdated(bool updatedIn) {
-	updated = updatedIn;
+void SystemClass::setStateUpdated(bool stateUpdatedIn) {
+	stateUpdated = stateUpdatedIn;
+}
+
+void SystemClass::setInFlight(bool inFlightIn) {
+	inFlight = inFlightIn;
 }

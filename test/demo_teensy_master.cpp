@@ -76,6 +76,10 @@ public:
 
 class Board : public BaseTeensyBoardClass<Intranet, Telecom, Sensors> {
 public:
+	void init() override {
+		sys.setStateUpdated(true); // Simple example, don't worry about this yet
+	}
+
 	void update() override {
 		SystemStatus systemStatus = sys.get();
 		intra.update(systemStatus);

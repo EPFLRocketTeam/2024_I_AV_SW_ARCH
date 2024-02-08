@@ -65,7 +65,7 @@ protected:
 	}
 public:
 	FSMState getNextState() override {
-		if(tele.isCommandUpdated() && tele.isCommand(CMD_STATE)){
+		if(tele.isCommandUpdated() && tele.isCommand(CMD_AV_STATE)){
 			auto nextState = (FSMState) tele.get().comId;
 			tele.resetCommand();
 			return nextState;

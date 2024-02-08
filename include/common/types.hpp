@@ -11,7 +11,13 @@ typedef uint32_t time_millis_t;
 
 enum CommandID: uint8_t {
 	CMD_NONE = 0x00,
-	CMD_STATE = 0x01,
+	CMD_AV_STATE = 0x01,
+	CMD_PR_VENT_N2O = 0x11,
+	CMD_PR_VENT_FUEL = 0x12,
+	CMD_GSE_DISCONNECT = 0x21,
+	CMD_GSE_PRESSURIZE = 0x22,
+	CMD_GSE_FILLING_N2O = 0x23,
+	CMD_GSE_VENT = 0x24,
 };
 
 typedef double scalar;

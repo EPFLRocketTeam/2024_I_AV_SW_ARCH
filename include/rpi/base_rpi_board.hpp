@@ -15,7 +15,7 @@ protected:
 
 public:
 	FSMState getNextState() override {
-		if (intra.isCommandUpdated() && intra.isCommand(CMD_STATE)) {
+		if (intra.isCommandUpdated() && intra.isCommand(CMD_AV_STATE)) {
 			auto nextState = (FSMState) intra.get().comId;
 			intra.resetCommand();
 			return nextState;

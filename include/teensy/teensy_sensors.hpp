@@ -12,7 +12,7 @@
  * Template interface for the Teensy's sensors acquisition class.
  */
 template<typename SensorsStatus>
-class TeensySensorsClass : public BaseDataComponent<SensorsStatus> {
+class TeensySensorsClass : public virtual BaseDataComponent<SensorsStatus> {
 
 };
 

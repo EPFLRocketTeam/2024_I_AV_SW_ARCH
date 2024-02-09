@@ -9,7 +9,7 @@
 #include "logger.hpp"
 
 template< class IntranetClass, class TelecomClass, class SensorsClass>
-class BaseTeensyBoardClass : public BaseBoardClass {
+class BaseTeensyBoardClass : public virtual BaseBoardClass {
 protected:
 	IntranetClass intra;
 	TelecomClass tele;

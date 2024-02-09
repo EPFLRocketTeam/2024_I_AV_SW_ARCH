@@ -12,7 +12,7 @@
  * Template interface for the Teensy's telecom connection.
  */
 template<typename TelecomStatus>
-class TeensyTelecomClass : public BaseDataComponent<TelecomStatus>, public CommandHandler {
+class TeensyTelecomClass : public virtual BaseDataComponent<TelecomStatus>, public virtual CommandHandler {
 public:
 
 };

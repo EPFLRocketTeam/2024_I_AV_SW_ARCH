@@ -11,7 +11,7 @@ struct IntranetStatus {
 	bool ok_intra;
 };
 
-class Intranet : public TeensyIntranetClass<IntranetStatus> {
+class Intranet : public virtual TeensyIntranetClass<IntranetStatus> {
 protected:
 	bool ok_intra = true;
 public:
@@ -34,7 +34,7 @@ struct SensorsStatus {
 	int ok_sens;
 };
 
-class Sensors : public TeensySensorsClass<SensorsStatus> {
+class Sensors : public virtual TeensySensorsClass<SensorsStatus> {
 protected:
 	int ok_sens = 3;
 public:
@@ -56,7 +56,7 @@ struct TelecomStatus{
 	uint8_t comVal;
 };
 
-class Telecom : public TeensyTelecomClass<TelecomStatus> {
+class Telecom : public virtual TeensyTelecomClass<TelecomStatus> {
 protected:
 	char ok_tele = 'A';
 public:
@@ -74,7 +74,7 @@ public:
 
 };
 
-class Board : public BaseTeensyBoardClass<Intranet, Telecom, Sensors> {
+class Board : public virtual BaseTeensyBoardClass<Intranet, Telecom, Sensors> {
 public:
 	void init() override {
 		sys.setStateUpdated(true); // Simple example, don't worry about this yet

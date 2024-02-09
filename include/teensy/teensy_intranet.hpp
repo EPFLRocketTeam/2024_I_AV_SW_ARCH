@@ -11,7 +11,7 @@
  * Template interface for the Teensy's intranet connection.
  */
 template<typename IntranetStatus>
-class TeensyIntranetClass : public BaseIntranet<IntranetStatus> {
+class TeensyIntranetClass : public virtual BaseIntranet<IntranetStatus> {
 public:
 
 };

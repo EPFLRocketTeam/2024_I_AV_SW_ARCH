@@ -12,7 +12,7 @@
  * Template interface for the RPI's intranet connection.
  */
 template<typename IntranetStatus>
-class RpiIntranetClass : public BaseIntranet<IntranetStatus>, public CommandHandler {
+class RpiIntranetClass : public virtual BaseIntranet<IntranetStatus>, public virtual CommandHandler {
 public:
 
 };

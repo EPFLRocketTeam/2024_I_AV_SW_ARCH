@@ -9,7 +9,7 @@
 #include "logger.hpp"
 
 template< class IntranetClass>
-class BaseRpiBoardClass : public BaseBoardClass {
+class BaseRpiBoardClass : public virtual BaseBoardClass {
 protected:
 	IntranetClass intra;
 

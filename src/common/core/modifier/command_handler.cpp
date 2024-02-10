@@ -2,7 +2,7 @@
 // Created by Samuel on 04/02/2024.
 //
 
-#include "modifier/command_handler.hpp"
+#include "core/modifier/command_handler.hpp"
 
 bool CommandHandler::isCommandUpdated() {
 	return comId != lastComId;

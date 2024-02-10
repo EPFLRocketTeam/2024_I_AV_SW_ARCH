@@ -11,7 +11,7 @@ struct IntranetStatus {
 	uint8_t comVal;
 };
 
-class Intranet : public RpiIntranetClass<IntranetStatus> {
+class Intranet : public virtual RpiIntranetClass<IntranetStatus> {
 protected:
 	bool ok_intra = true;
 public:
@@ -32,7 +32,7 @@ public:
 	}
 };
 
-class Board : public BaseRpiBoardClass<Intranet> {
+class Board : public virtual BaseRpiBoardClass<Intranet> {
 public:
 	void init() override {
 		sys.setStateUpdated(true); // Simple example, don't worry about this yet

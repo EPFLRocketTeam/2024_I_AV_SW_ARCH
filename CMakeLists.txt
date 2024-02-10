@@ -9,7 +9,7 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -ggdb")
 
 # Library for Common Things
-add_library(2024_I_AV_SW_COMMON include/common/core/system.hpp src/common/core/system.cpp include/common/core/fsm.hpp include/common/logger.hpp src/common/core/base_board.cpp include/common/core/base_board.hpp include/common/modifier/command_handler.hpp src/common/modifier/command_handler.cpp include/common/types.hpp include/common/core/data/base_data_component.hpp include/common/core/data/base_intranet.hpp include/common/config.hpp)
+add_library(2024_I_AV_SW_COMMON include/common/core/system.hpp src/common/core/system.cpp include/common/core/fsm.hpp include/common/logger.hpp src/common/core/base_board.cpp include/common/core/base_board.hpp include/common/core/modifier/command_handler.hpp src/common/core/modifier/command_handler.cpp include/common/types.hpp include/common/core/data/base_data_component.hpp include/common/core/data/base_intranet.hpp include/common/sensors/base_sensor.hpp include/common/sensors/accel_sensor.hpp include/common/sensors/accel_sensor.hpp include/common/sensors/gyro_sensor.hpp include/common/sensors/mag_sensor.hpp include/common/sensors/baro_sensor.hpp include/common/sensors/gnss_sensor.hpp)
 target_include_directories(2024_I_AV_SW_COMMON PUBLIC include/common)
 
 # Library for the RPI

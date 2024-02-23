@@ -9,16 +9,16 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -ggdb")
 
 # Library for Common Things
-add_library(2024_I_AV_SW_COMMON include/common/core/system.hpp src/common/core/system.cpp include/common/core/fsm.hpp include/common/logger.hpp src/common/core/base_board.cpp include/common/core/base_board.hpp include/common/core/modifier/command_handler.hpp src/common/core/modifier/command_handler.cpp include/common/types.hpp include/common/core/data/base_data_component.hpp include/common/core/data/base_intranet.hpp include/common/sensors/base_sensor.hpp include/common/sensors/accel_sensor.hpp include/common/sensors/accel_sensor.hpp include/common/sensors/gyro_sensor.hpp include/common/sensors/mag_sensor.hpp include/common/sensors/baro_sensor.hpp include/common/sensors/gnss_sensor.hpp)
+add_library(2024_I_AV_SW_COMMON include/common/core/system.hpp src/common/core/system.cpp include/common/core/fsm.hpp include/common/logger.hpp src/common/core/base_board.cpp include/common/core/base_board.hpp include/common/core/channel/modifier/command_handler.hpp src/common/core/channel/modifier/command_handler.cpp include/common/types.hpp include/common/sensors/base_sensor.hpp include/common/sensors/accel_sensor.hpp include/common/sensors/accel_sensor.hpp include/common/sensors/gyro_sensor.hpp include/common/sensors/mag_sensor.hpp include/common/sensors/baro_sensor.hpp include/common/sensors/gnss_sensor.hpp include/common/core/channel/base_data_channel.hpp include/common/core/channel/base_async_channel.hpp src/common/core/channel/base_sync_channel.cpp include/common/core/channel/base_sync_channel.hpp)
 target_include_directories(2024_I_AV_SW_COMMON PUBLIC include/common)
 
 # Library for the RPI
-add_library(2024_I_AV_SW_RPI include/rpi/base_rpi_board.hpp include/rpi/rpi_intranet.hpp)
+add_library(2024_I_AV_SW_RPI include/rpi/base_rpi_board.hpp)
 target_link_libraries(2024_I_AV_SW_RPI PUBLIC 2024_I_AV_SW_COMMON)
 target_include_directories(2024_I_AV_SW_RPI PUBLIC include/rpi)
 
 # Library for the Teensy
-add_library(2024_I_AV_SW_TEENSY include/teensy/base_teensy_board.hpp include/teensy/teensy_intranet.hpp include/teensy/teensy_telecom.hpp include/teensy/teensy_sensors.hpp)
+add_library(2024_I_AV_SW_TEENSY include/teensy/base_teensy_board.hpp)
 target_link_libraries(2024_I_AV_SW_TEENSY PUBLIC 2024_I_AV_SW_COMMON)
 target_include_directories(2024_I_AV_SW_TEENSY PUBLIC include/teensy)
 

@@ -9,13 +9,12 @@
 
 template<typename Packet>
 class BaseDataChannel {
-public:
-
+protected:
 	virtual Packet fromBytes(uint8_t* bytesIn, uint32_t lenIn) = 0;
 	virtual uint32_t toBytes(const Packet& packetIn, uint8_t* bytesOut) = 0;
 
 	virtual bool readByte(uint8_t& byte) = 0;
-	virtual bool writeByte(const uint8_t& packet) = 0;
+	virtual bool writeByte(const uint8_t& byte) = 0;
 };
 
 

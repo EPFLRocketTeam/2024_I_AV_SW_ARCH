@@ -44,23 +44,24 @@ public:
 	void tick();
 
 	bool readAvailable();
+	bool writeAvailable();
+
 	void decode();
 	void encode();
 
 	virtual void onRead(const IntranetPacket& packet) = 0;
 
-	virtual IntranetPacket fromBytes(uint8_t* bytesIn, uint32_t lenIn) override;
-	virtual uint32_t toBytes(const IntranetPacket& packetIn, uint8_t* bytesOut) override;
-
+	IntranetPacket fromBytes(uint8_t* bytesIn, uint32_t lenIn) override;
+	uint32_t toBytes(const IntranetPacket& packetIn, uint8_t* bytesOut) override;
 
 protected:
 	IntranetParserState parserState = ID;
 	uint8_t parserPayloadIdx = 0;
 
-	uint8_t id;
-	uint8_t len;
-	uint8_t payload[INTRANET_MAX_PAYLOAD_SIZE];
-	uint8_t csc;
+	uint8_t id{};
+	uint8_t len{};
+	uint8_t csc{};
+	uint8_t payload[INTRANET_MAX_PAYLOAD_SIZE]{};
 
 	uint8_t computeCSC();
 };

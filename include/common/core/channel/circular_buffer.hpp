@@ -9,6 +9,7 @@ class CircularBuffer {
 public:
 	void pushBack(const uint8_t& byte);
 	uint8_t popFront();
+	bool isDataAvailable();
 };
 
 #endif //INC_2024_I_AV_SW_CIRCULAR_BUFFER_HPP

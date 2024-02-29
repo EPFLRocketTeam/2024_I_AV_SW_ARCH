@@ -9,7 +9,7 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -ggdb")
 
 # Library for Common Things
-add_library(2024_I_AV_SW_COMMON include/common/core/system.hpp src/common/core/system.cpp include/common/core/fsm.hpp include/common/logger.hpp src/common/core/base_board.cpp include/common/core/base_board.hpp include/common/core/channel/modifier/command_handler.hpp src/common/core/channel/modifier/command_handler.cpp include/common/types.hpp include/common/sensors/base_sensor.hpp include/common/sensors/accel_sensor.hpp include/common/sensors/accel_sensor.hpp include/common/sensors/gyro_sensor.hpp include/common/sensors/mag_sensor.hpp include/common/sensors/baro_sensor.hpp include/common/sensors/gnss_sensor.hpp include/common/core/channel/base_data_channel.hpp include/common/core/channel/base_intranet_channel.hpp include/common/core/channel/circular_buffer.hpp src/common/core/channel/base_intranet_channel.cpp)
+add_library(2024_I_AV_SW_COMMON include/common/core/system.hpp src/common/core/system.cpp include/common/core/fsm.hpp include/common/logger.hpp src/common/core/base_board.cpp include/common/core/base_board.hpp include/common/core/channel/modifier/command_handler.hpp src/common/core/channel/modifier/command_handler.cpp include/common/types.hpp include/common/core/channel/base_data_channel.hpp include/common/core/channel/base_intranet_channel.hpp include/common/core/channel/circular_buffer.hpp src/common/core/channel/base_intranet_channel.cpp)
 target_include_directories(2024_I_AV_SW_COMMON PUBLIC include/common)
 
 # Library for the RPI
@@ -18,7 +18,7 @@ target_link_libraries(2024_I_AV_SW_RPI PUBLIC 2024_I_AV_SW_COMMON)
 target_include_directories(2024_I_AV_SW_RPI PUBLIC include/rpi)
 
 # Library for the Teensy
-add_library(2024_I_AV_SW_TEENSY include/teensy/base_teensy_board.hpp)
+add_library(2024_I_AV_SW_TEENSY include/teensy/base_teensy_board.hpp include/teensy/base_teensy_telecom.hpp)
 target_link_libraries(2024_I_AV_SW_TEENSY PUBLIC 2024_I_AV_SW_COMMON)
 target_include_directories(2024_I_AV_SW_TEENSY PUBLIC include/teensy)
 

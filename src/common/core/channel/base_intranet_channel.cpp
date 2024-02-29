@@ -9,11 +9,17 @@ void BaseIntranetChannel::tick(){
 	// sync read from buffer
 	while(readAvailable())
 		decode();
+
+	while(writeAvailable())
+		encode();
 }
 
 bool BaseIntranetChannel::readAvailable() {
-	// TODO
-	return false;
+	return readBuffer.isDataAvailable();
+}
+
+bool BaseIntranetChannel::writeAvailable() {
+	return writeBuffer.isDataAvailable();
 }
 
 void BaseIntranetChannel::decode() {
@@ -22,11 +28,14 @@ void BaseIntranetChannel::decode() {
 	switch(parserState) {
 		case ID:
 			id = byte;
+			len = 0;
+			csc = 0;
 			parserState = LEN;
 			break;
 		case LEN:
 			len = byte;
 			parserPayloadIdx = 0;
+			parserState = PAYLOAD;
 			break;
 		case PAYLOAD:
 			if(parserPayloadIdx < len)
@@ -49,7 +58,8 @@ void BaseIntranetChannel::decode() {
 }
 
 void BaseIntranetChannel::encode() {
-	// TODO
+	uint8_t byte = writeBuffer.popFront();
+	writeByte(byte);
 }
 
 uint8_t BaseIntranetChannel::computeCSC() {
@@ -75,7 +85,6 @@ IntranetPacket BaseIntranetChannel::fromBytes(uint8_t *bytesIn, uint32_t lenIn) 
 }
 
 uint32_t BaseIntranetChannel::toBytes(const IntranetPacket &packetIn, uint8_t *bytesOut) {
-
 	if(bytesOut)
 		return 0; // Array should not be created outside the function
 

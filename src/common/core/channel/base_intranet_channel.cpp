@@ -14,6 +14,13 @@ void BaseIntranetChannel::tick(){
 		encode();
 }
 
+void BaseIntranetChannel::write(const IntranetPacket &packet) {
+	uint8_t* bytes;
+	uint32_t len = toBytes(packet, bytes);
+	for(uint32_t i = 0; i < len; i++)
+		writeBuffer.pushBack(bytes[i]);
+}
+
 bool BaseIntranetChannel::readAvailable() {
 	return readBuffer.isDataAvailable();
 }

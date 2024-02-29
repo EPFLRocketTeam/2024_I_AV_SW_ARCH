@@ -38,11 +38,9 @@ enum IntranetParserState : uint8_t {
  */
 class BaseIntranetChannel : public BaseDataChannel<IntranetPacket> {
 public:
-	CircularBuffer readBuffer;
-	CircularBuffer writeBuffer;
-
 	void tick();
-
+	void write(const IntranetPacket& packet);
+protected:
 	bool readAvailable();
 	bool writeAvailable();
 
@@ -55,6 +53,9 @@ public:
 	uint32_t toBytes(const IntranetPacket& packetIn, uint8_t* bytesOut) override;
 
 protected:
+	CircularBuffer readBuffer;
+	CircularBuffer writeBuffer;
+
 	IntranetParserState parserState = ID;
 	uint8_t parserPayloadIdx = 0;
 

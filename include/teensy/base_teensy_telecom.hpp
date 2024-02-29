@@ -7,19 +7,14 @@
 
 #include <cstdint>
 #include "core/channel/base_data_channel.hpp"
+#include "core/channel/modifier/command_handler.hpp"
 
 template<typename TeensyTelecomMemory, typename TeensyTelecomPacket>
-class BaseTeensyTelecom : public virtual BaseDataChannel<TeensyTelecomPacket> {
+class BaseTeensyTelecom : public virtual BaseDataChannel<TeensyTelecomPacket>, public virtual CommandHandler {
 public:
 	// Get the current state of the telecom memory
 	// The telecom memory SHOULD NOT contain raw buffered data
 	virtual TeensyTelecomMemory get() = 0;
-
-	// Checks whether a new command was received
-	virtual bool isCommandUpdated() = 0;
-
-	// Checks which command is currently held in memory
-	virtual bool isCommand(const uint8_t& command) = 0;
 
 	// Synchronous update
 	virtual void tick() = 0;

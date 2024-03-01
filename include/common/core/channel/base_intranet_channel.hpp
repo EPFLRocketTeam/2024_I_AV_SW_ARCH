@@ -8,6 +8,7 @@
 #include "base_data_channel.hpp"
 #include "circular_buffer.hpp"
 
+#define INTRANET_MAX_RAW_BUFFER_SIZE 2048
 #define INTRANET_MAX_PAYLOAD_SIZE 256
 #define INTRANET_METADATA_BYTES 3
 
@@ -53,8 +54,8 @@ protected:
 	uint32_t toBytes(const IntranetPacket& packetIn, uint8_t* bytesOut) override;
 
 protected:
-	CircularBuffer readBuffer;
-	CircularBuffer writeBuffer;
+	CircularBuffer<INTRANET_MAX_RAW_BUFFER_SIZE> readBuffer;
+	CircularBuffer<INTRANET_MAX_RAW_BUFFER_SIZE> writeBuffer;
 
 	IntranetParserState parserState = ID;
 	uint8_t parserPayloadIdx = 0;

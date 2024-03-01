@@ -22,14 +22,14 @@ public:
 template<size_t MAX_SIZE>
 void CircularBuffer<MAX_SIZE>::pushBack(const uint8_t &byte) {
 	buffer[tail] = byte;
-	tail = (tail + 1) % MAX_SIZE;
+	tail = (tail + 1) & (MAX_SIZE - 1);
 	size++;
 }
 
 template<size_t MAX_SIZE>
 uint8_t CircularBuffer<MAX_SIZE>::popFront() {
 	uint8_t byte = buffer[head];
-	head = (head + 1) % MAX_SIZE;
+	head = (head + 1) & (MAX_SIZE - 1);
 	size--;
 	return byte;
 }

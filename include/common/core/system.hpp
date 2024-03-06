@@ -25,6 +25,9 @@ struct SystemStatus {
 	bool inFlight;
 };
 
+/**
+ * SystemClass contains essential data and flags for Avionics Operations. It may be seen as the "memory" of BaseBoardClass.
+ */
 class SystemClass {
 private:
 	time_millis_t time;

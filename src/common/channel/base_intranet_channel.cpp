@@ -3,7 +3,7 @@
 //
 
 #include <cstring>
-#include "core/channel/base_intranet_channel.hpp"
+#include "channel/base_intranet_channel.hpp"
 
 void BaseIntranetChannel::tick(){
 	// sync read from buffer

@@ -7,6 +7,11 @@
 
 #include <cstdint>
 
+/**
+ * BaseDataChannel is the interface describing all potential communication channels within the AV and with external Systems.
+ *
+ * @tparam Packet: the packet struct that passes through the channel
+ */
 template<typename Packet>
 class BaseDataChannel {
 protected:

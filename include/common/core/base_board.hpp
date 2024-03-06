@@ -8,6 +8,9 @@
 
 #include "core/system.hpp"
 
+/**
+ * BaseBoardClass is the interface from which all board derive. To run the board, one must first call <strong>init</strong> then put <strong>loopOnce</strong> in an infinite loop
+ */
 class BaseBoardClass {
 protected:
 	SystemClass sys{};

@@ -26,16 +26,15 @@ enum IntranetParserState : uint8_t {
 	CSC,
 };
 
-
 /**
- * Read:
- *  As soon as raw data is received, it is stored in a buffer asynchronously
- *  Each tick, the buffer is read synchronously and decodes the data,
- *  the avionics then acts.
- *
- * Write:
- * Data is written to the buffer (either sync or async)
- * Each tick, the buffer is read synchronously and the Avionics acts
+ * BaseIntranetChannel is the abstract class that all "board-bound" Intranet implementations derive from.
+ * The Intranet is a full-duplex communication channel.
+ * \n\n
+ * Read operations:
+ * - inbound data is read asynchronously and store as-is (raw) in the read buffer.
+ * - during each loop iteration, the buffer is read synchronously and the data is processed into IntranetPacket via the <strong>decode</strong> method
+  * \n\n
+ * Write operations are dependant on the master/slave role of the board. A buffer system similar to read operations is available.
  */
 class BaseIntranetChannel : public BaseDataChannel<IntranetPacket> {
 public:

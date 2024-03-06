@@ -6,8 +6,8 @@
 #define INC_2024_I_AV_SW_BASE_TEENSY_TELECOM_HPP
 
 #include <cstdint>
-#include "core/channel/base_data_channel.hpp"
-#include "core/channel/modifier/command_handler.hpp"
+#include "channel/base_data_channel.hpp"
+#include "channel/modifier/command_handler.hpp"
 
 template<typename TeensyTelecomMemory, typename TeensyTelecomPacket>
 class BaseTeensyTelecom : public virtual BaseDataChannel<TeensyTelecomPacket>, public virtual CommandHandler {

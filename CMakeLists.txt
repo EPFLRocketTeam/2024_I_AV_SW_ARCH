@@ -9,7 +9,7 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -ggdb")
 
 # Library for Common Things
-add_library(2024_I_AV_SW_COMMON include/common/core/system.hpp src/common/core/system.cpp include/common/core/fsm.hpp include/common/logger.hpp src/common/core/base_board.cpp include/common/core/base_board.hpp include/common/core/channel/modifier/command_handler.hpp src/common/core/channel/modifier/command_handler.cpp include/common/types.hpp include/common/core/channel/base_data_channel.hpp include/common/core/channel/base_intranet_channel.hpp include/common/core/channel/circular_buffer.hpp src/common/core/channel/base_intranet_channel.cpp)
+add_library(2024_I_AV_SW_COMMON include/common/core/system.hpp src/common/core/system.cpp include/common/core/fsm.hpp include/common/logger.hpp src/common/core/base_board.cpp include/common/core/base_board.hpp include/common/channel/modifier/command_handler.hpp src/common/channel/modifier/command_handler.cpp include/common/types.hpp include/common/channel/base_data_channel.hpp include/common/channel/base_intranet_channel.hpp include/common/channel/circular_buffer.hpp src/common/channel/base_intranet_channel.cpp)
 target_include_directories(2024_I_AV_SW_COMMON PUBLIC include/common)
 
 # Library for the RPI

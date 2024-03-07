@@ -9,7 +9,10 @@
 #include "channel/base_data_channel.hpp"
 #include "channel/modifier/command_handler.hpp"
 
+// Telemetry in should be async and directly sent to CommandHandler members
 void teensy_handleTelemetryIn(int packetSize);
+
+// Telemetry out should be sync, this is just in case
 void teensy_handleTelemetryOut(int packetSize);
 
 template<typename TeensyTelecomPacket>

@@ -15,54 +15,102 @@ protected:
 	TelecomClass tele;
 	SensorsClass sens;
 
-	FSMState stateInit() {
-		LOG("BaseRpiBoardClass::stateInit > OVERRIDE ME !");
-		return INIT_STATE;
-	}
-	FSMState stateCalibration() {
-		LOG("BaseRpiBoardClass::stateCalibration > OVERRIDE ME !");
-		return CALIBRATION_STATE;
-	}
-	FSMState stateArmed() {
-		LOG("BaseRpiBoardClass::stateArmed > OVERRIDE ME !");
-		return ARMED_STATE;
-	}
-	FSMState statePressurized() {
-		LOG("BaseRpiBoardClass::statePressurized > OVERRIDE ME !");
-		return TOUCHDOWN_STATE;
-	}
-	FSMState stateFlightStateReady() {
-		LOG("BaseRpiBoardClass::stateFlightStateReady > OVERRIDE ME !");
-		return FLIGHTREADY_STATE;
-	}
-	FSMState stateIgnite() {
-		LOG("BaseRpiBoardClass::stateIgnite > OVERRIDE ME !");
-		return IGNITE_STATE;
-	}
-	FSMState stateIgnition() {
-		LOG("BaseRpiBoardClass::stateIgnition > OVERRIDE ME !");
-		return IGNITION_STATE;
-	}
-	FSMState stateAscent() {
-		LOG("BaseRpiBoardClass::stateAscent > OVERRIDE ME !");
-		return ASCENT_STATE;
-	}
-	FSMState stateHovering() {
-		LOG("BaseRpiBoardClass::stateHovering > OVERRIDE ME !");
-		return HOVERING_STATE;
-	}
-	FSMState stateDescent() {
-		LOG("BaseRpiBoardClass::stateDescent > OVERRIDE ME !");
-		return DESCENT_STATE;
-	}
-	FSMState stateTouchdown() {
-		LOG("BaseRpiBoardClass::stateTouchdown > OVERRIDE ME !");
-		return TOUCHDOWN_STATE;
-	}
-	FSMState stateAbort()  {
-		LOG("BaseRpiBoardClass::stateAbort > OVERRIDE ME !");
-		return ABORT_STATE;
-	}
+    FSMState stateInit() {
+        LOG("BaseRpiBoardClass::stateInit > OVERRIDE ME !");
+        if (sys.get().state != INIT_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(INIT_STATE)
+        }
+        return INIT_STATE;
+    }
+    FSMState stateCalibration() {
+        LOG("BaseRpiBoardClass::stateCalibration > OVERRIDE ME !");
+        if (sys.get().state != CALIBRATION_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(CALIBRATION_STATE)
+        }
+        return CALIBRATION_STATE;
+    }
+    FSMState stateArmed() {
+        LOG("BaseRpiBoardClass::stateArmed > OVERRIDE ME !");
+        if (sys.get().state != ARMED_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(ARMED_STATE)
+        }
+        return ARMED_STATE;
+    }
+    FSMState statePressurized() {
+        LOG("BaseRpiBoardClass::statePressurized > OVERRIDE ME !");
+        if (sys.get().state != TOUCHDOWN_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(TOUCHDOWN_STATE)
+        }
+        return TOUCHDOWN_STATE;
+    }
+    FSMState stateFlightStateReady() {
+        LOG("BaseRpiBoardClass::stateFlightStateReady > OVERRIDE ME !");
+        if (sys.get().state != FLIGHTREADY_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(FLIGHTREADY_STATE)
+        }
+        return FLIGHTREADY_STATE;
+    }
+    FSMState stateIgnite() {
+        LOG("BaseRpiBoardClass::stateIgnite > OVERRIDE ME !");
+        if (sys.get().state != IGNITE_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(IGNITE_STATE)
+        }
+        return IGNITE_STATE;
+    }
+    FSMState stateIgnition() {
+        LOG("BaseRpiBoardClass::stateIgnition > OVERRIDE ME !");
+        if (sys.get().state != IGNITION_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(IGNITION_STATE)
+        }
+        return IGNITION_STATE;
+    }
+    FSMState stateAscent() {
+        LOG("BaseRpiBoardClass::stateAscent > OVERRIDE ME !");
+        if (sys.get().state != ASCENT_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(ASCENT_STATE)
+        }
+        return ASCENT_STATE;
+    }
+    FSMState stateHovering() {
+        LOG("BaseRpiBoardClass::stateHovering > OVERRIDE ME !");
+        if (sys.get().state != HOVERING_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(HOVERING_STATE)
+        }
+        return HOVERING_STATE;
+    }
+    FSMState stateDescent() {
+        LOG("BaseRpiBoardClass::stateDescent > OVERRIDE ME !");
+        if (sys.get().state != DESCENT_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(DESCENT_STATE)
+        }
+        return DESCENT_STATE;
+    }
+    FSMState stateTouchdown() {
+        LOG("BaseRpiBoardClass::stateTouchdown > OVERRIDE ME !");
+        if (sys.get().state != TOUCHDOWN_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(TOUCHDOWN_STATE)
+        }
+        return TOUCHDOWN_STATE;
+    }
+    FSMState stateAbort()  {
+        LOG("BaseRpiBoardClass::stateAbort > OVERRIDE ME !");
+        if (sys.get().state != ABORT_STATE) {
+            // Usefull to check this ? I don't know in C++ ...
+            sys.setState(ABORT_STATE)
+        }
+        return ABORT_STATE;
+    }
 public:
 	FSMState getNextState() override {
 		if(tele.isCommandUpdated() && tele.isCommand(CMD_AV_STATE)){

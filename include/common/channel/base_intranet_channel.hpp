@@ -39,13 +39,12 @@ enum IntranetParserState : uint8_t {
 class BaseIntranetChannel : public BaseDataChannel<IntranetPacket> {
 public:
 	void tick();
-	void write(const IntranetPacket& packet);
+	void writeSync(const IntranetPacket& packet);
 protected:
 	bool readAvailable();
 	bool writeAvailable();
 
 	void decode();
-	void encode();
 
 	virtual void onRead(const IntranetPacket& packet) = 0;
 

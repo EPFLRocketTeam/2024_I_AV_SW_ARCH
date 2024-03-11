@@ -62,11 +62,6 @@ void BaseIntranetChannel::decode() {
 	}
 }
 
-void BaseIntranetChannel::encode() {
-	uint8_t byte = writeBuffer.popFront();
-	writeByte(byte);
-}
-
 uint8_t BaseIntranetChannel::computeCSC() {
 	uint8_t u = 0;
 

@@ -10,11 +10,9 @@ void BaseIntranetChannel::tick(){
 	while(readAvailable())
 		decode();
 
-	while(writeAvailable())
-		encode();
 }
 
-void BaseIntranetChannel::write(const IntranetPacket &packet) {
+void BaseIntranetChannel::writeSync(const IntranetPacket &packet) {
 	uint8_t* bytes;
 	uint32_t len = toBytes(packet, bytes);
 	for(uint32_t i = 0; i < len; i++)

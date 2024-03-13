@@ -5,13 +5,14 @@
 #include "core/system.hpp"
 
 SystemStatus SystemClass::get() {
-	return SystemStatus{
+	return SystemStatus {
 		.time = time,
 		.lastFSMTransition = lastFSMTransition,
 		.state = state,
 		.initCheckComplete = initCheckComplete,
 		.stateUpdated = stateUpdated,
 		.inFlight = inFlight,
+        .ignitionSequence = ignitionSequence,
 	};
 }
 
@@ -37,4 +38,8 @@ void SystemClass::setStateUpdated(bool stateUpdatedIn) {
 
 void SystemClass::setInFlight(bool inFlightIn) {
 	inFlight = inFlightIn;
+}
+
+void SystemClass::setIgnitionSequence(int ignitionSequenceIn) {
+    ignitionSequence = ignitionSequenceIn;
 }

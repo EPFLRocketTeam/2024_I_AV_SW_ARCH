@@ -13,7 +13,7 @@
  */
 class BaseBoardClass {
 protected:
-	SystemClass sys{};
+	SystemClass sys = SystemClass();
 public:
 	void loopOnce();
 	virtual time_millis_t getCurrentTimeMillis();

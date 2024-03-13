@@ -15,6 +15,7 @@
  * @var initCheckComplete: flag ; if the board init was successful
  * @var stateUpdated: flag ; if the state was updated this cycle
  * @var inFlight: flag ; if the rocket is in an inFlight state ; used for abort
+ * @var ignitionSequence: number ; current ignition sequence ;  used for tracking the state of ignition
  */
 struct SystemStatus {
 	time_millis_t time;
@@ -23,6 +24,7 @@ struct SystemStatus {
 	bool initCheckComplete;
 	bool stateUpdated;
 	bool inFlight;
+    int ignitionSequence;
 };
 
 /**
@@ -36,6 +38,7 @@ private:
 	bool initCheckComplete;
 	bool stateUpdated;
 	bool inFlight;
+    int ignitionSequence;
 public:
 	SystemStatus get();
 	void setTime(time_millis_t);
@@ -44,6 +47,7 @@ public:
 	void setInitCheckComplete(bool);
 	void setStateUpdated(bool);
 	void setInFlight(bool);
+    void setIgnitionSequence(int);
 };
 
 #endif //INC_2024_I_AV_SW_SYSTEM_HPP

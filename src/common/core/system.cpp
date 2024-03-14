@@ -13,6 +13,7 @@ SystemStatus SystemClass::get() {
 		.stateUpdated = stateUpdated,
 		.inFlight = inFlight,
         .ignitionSequence = ignitionSequence,
+        .calibrationSuccessful = calibrationSuccessful,
 	};
 }
 
@@ -42,4 +43,8 @@ void SystemClass::setInFlight(bool inFlightIn) {
 
 void SystemClass::setIgnitionSequence(int ignitionSequenceIn) {
     ignitionSequence = ignitionSequenceIn;
+}
+
+void SystemClass::setCalibrationSuccessful(bool calibrationSuccessfulIn) {
+    calibrationSuccessful = calibrationSuccessfulIn;
 }

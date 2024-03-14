@@ -8,8 +8,10 @@
 #include "core/base_board.hpp"
 #include "logger.hpp"
 
-#define IGNITION_THRESHOLD 3000
-#define IGNITION_SEQUENCE_LIMIT 3
+#define IGNITION_SEQUENCE_THRESHOLD_1 3000
+#define IGNITION_SEQUENCE_THRESHOLD_2 6000
+#define IGNITION_SEQUENCE_THRESHOLD_3 9000
+#define IGNITION_SEQUENCE_LIMIT 4
 
 template<class IntranetClass, class TelecomClass, class SensorsClass>
 class BaseTeensyBoardClass : public virtual BaseBoardClass {
@@ -66,6 +68,7 @@ protected:
             tele.resetCommand();
             switch (nextState) {
                 case CALIBRATION_STATE:
+                    sys.setCalibrationSuccessful(false);
                     return CALIBRATION_STATE;
                 case ARMED_STATE:
                     return sys.get().initCheckComplete ? ARMED_STATE : INIT_STATE;
@@ -83,6 +86,7 @@ protected:
         if(calibrationReady && tele.isCommandUpdated() && tele.isCommand(CMD_AV_STATE)){
             FSMState nextState = tele.get().comId;
             tele.resetCommand();
+            sys.setCalibrationSuccessful(true);
             return INIT_STATE;
         }
 
@@ -108,7 +112,6 @@ protected:
     }
     FSMState statePressurized() {
         if (shouldAbort()) {
-            tele.reset();
             return ABORT_STATE;
         }
 
@@ -116,7 +119,6 @@ protected:
     }
     FSMState stateFlightStateReady() {
         if (shouldAbort()) {
-            tele.reset();
             return ABORT_STATE;
         }
 
@@ -137,7 +139,6 @@ protected:
     }
     FSMState stateIgnite() {
         if (shouldAbort()) {
-            tele.reset();
             return ABORT_STATE;
         }
 
@@ -147,7 +148,6 @@ protected:
     }
     FSMState stateIgnition() {
         if (shouldAbort()) {
-            tele.reset();
             return ABORT_STATE;
         }
 
@@ -157,15 +157,20 @@ protected:
             return ASCENT_STATE;
         }
 
-        if (timeDiff(sys.get().time,sys.get().lastFSMTransition) >= ignitionSequence * IGNITION_THRESHOLD) {
-            sys.setIgnitionSequence(ignitionSequence + 1);
+        int timeSinceIgnite = timeDiff(sys.get().time,sys.get().lastFSMTransition);
+
+        if (timeSinceIgnite >= IGNITION_SEQUENCE_THRESHOLD_3) {
+            sys.setIgnitionSequence(4);
+        } else if (timeSinceIgnite >= IGNITION_SEQUENCE_THRESHOLD_2) {
+            sys.setIgnitionSequence(3);
+        } else if (timeSinceIgnite >= IGNITION_SEQUENCE_THRESHOLD_1) {
+            sys.setIgnitionSequence(2);
         }
 
         return IGNITION_STATE;
     }
     FSMState stateAscent() {
         if (shouldAbort()) {
-            tele.reset();
             return ABORT_STATE;
         }
 
@@ -173,7 +178,6 @@ protected:
     }
     FSMState stateHovering() {
         if (shouldAbort()) {
-            tele.reset();
             return ABORT_STATE;
         }
 
@@ -181,7 +185,6 @@ protected:
     }
     FSMState stateDescent() {
         if (shouldAbort()) {
-            tele.reset();
             return ABORT_STATE;
         }
 
@@ -189,7 +192,6 @@ protected:
     }
     FSMState stateTouchdown() {
         if (shouldAbort()) {
-            tele.reset();
             return ABORT_STATE;
         }
 
@@ -198,7 +200,7 @@ protected:
     FSMState stateAbort()  {
         abortAll();
 
-        return abortSuccessful() ? IGNITE_STATE : ABORT_STATE;
+        return abortSuccessful() ? INIT_STATE : ABORT_STATE;
     }
 
     /*
@@ -208,7 +210,11 @@ protected:
     bool shouldAbort() {
         if(tele.isCommandUpdated() && tele.isCommand(CMD_AV_STATE)){
             FSMState nextState = tele.get().comId;
-            return nextState == ABORT_STATE;
+            bool isAbort = nextState == ABORT_STATE;
+            if (isAbort) {
+                tele.reset();
+            }
+            return isAbort;
         }
         return false;
     }

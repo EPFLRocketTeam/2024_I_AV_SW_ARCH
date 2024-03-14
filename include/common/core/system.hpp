@@ -24,6 +24,7 @@ struct SystemStatus {
 	bool initCheckComplete;
 	bool stateUpdated;
 	bool inFlight;
+    bool calibrationSuccessful;
     int ignitionSequence;
 };
 
@@ -38,6 +39,7 @@ private:
 	bool initCheckComplete;
 	bool stateUpdated;
 	bool inFlight;
+    bool calibrationSuccessful;
     int ignitionSequence;
 public:
 	SystemStatus get();
@@ -48,6 +50,7 @@ public:
 	void setStateUpdated(bool);
 	void setInFlight(bool);
     void setIgnitionSequence(int);
+    void setCalibrationSuccessful(bool);
 };
 
 #endif //INC_2024_I_AV_SW_SYSTEM_HPP

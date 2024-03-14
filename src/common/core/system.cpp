@@ -12,8 +12,8 @@ SystemStatus SystemClass::get() {
 		.initCheckComplete = initCheckComplete,
 		.stateUpdated = stateUpdated,
 		.inFlight = inFlight,
-        .ignitionSequence = ignitionSequence,
-        .calibrationSuccessful = calibrationSuccessful,
+		.calibrationSuccessful = calibrationSuccessful,
+		.ignitionSequence = ignitionSequence,
 	};
 }
 

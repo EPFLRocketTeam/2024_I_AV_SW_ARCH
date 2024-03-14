@@ -20,7 +20,7 @@ protected:
 	TelecomClass tele;
 	SensorsClass sens;
 
-    // battery power is monitored and assessed
+	// battery power is monitored and assessed
     virtual bool checkPower() = 0;
 
     // Guidance initial trajectory is computed following procedure
@@ -92,6 +92,7 @@ protected:
 
         return CALIBRATION_STATE;
     }
+
     FSMState stateArmed() {
         if(tele.isCommandUpdated() && tele.isCommand(CMD_AV_STATE)){
             FSMState nextState = tele.get().comId;
@@ -110,17 +111,17 @@ protected:
 
         return ARMED_STATE;
     }
+
     FSMState statePressurized() {
-        if (shouldAbort()) {
+        if (shouldAbort())
             return ABORT_STATE;
-        }
 
         return checkFlightReady() ? FLIGHTREADY_STATE : PRESSURIZE_STATE;
     }
+
     FSMState stateFlightStateReady() {
-        if (shouldAbort()) {
+        if (shouldAbort())
             return ABORT_STATE;
-        }
 
         if(tele.isCommandUpdated() && tele.isCommand(CMD_AV_STATE)){
             FSMState nextState = tele.get().comId;
@@ -137,38 +138,38 @@ protected:
 
         return FLIGHTREADY_STATE;
     }
+
     FSMState stateIgnite() {
-        if (shouldAbort()) {
+        if (shouldAbort())
             return ABORT_STATE;
-        }
 
         sys.setIgnitionSequence(1);
 
         return IGNITION_STATE;
     }
+
     FSMState stateIgnition() {
-        if (shouldAbort()) {
-            return ABORT_STATE;
-        }
+		if (shouldAbort())
+			return ABORT_STATE;
 
-        int ignitionSequence = sys.get().ignitionSequence;
+		SystemStatus sysStat = sys.get();
 
-        if (ignitionSequence == IGNITION_SEQUENCE_LIMIT) {
-            return ASCENT_STATE;
-        }
+		int ignitionSequence = sysStat.ignitionSequence;
 
-        int timeSinceIgnite = timeDiff(sys.get().time,sys.get().lastFSMTransition);
+		if (ignitionSequence >= IGNITION_SEQUENCE_LIMIT)
+			return ASCENT_STATE;
 
-        if (timeSinceIgnite >= IGNITION_SEQUENCE_THRESHOLD_3) {
-            sys.setIgnitionSequence(4);
-        } else if (timeSinceIgnite >= IGNITION_SEQUENCE_THRESHOLD_2) {
+		if (sysStat.time - sysStat.lastFSMTransition >= IGNITION_SEQUENCE_THRESHOLD_3) {
+			sys.setIgnitionSequence(4);
+		} else if (sysStat.time - sysStat.lastFSMTransition >= IGNITION_SEQUENCE_THRESHOLD_2) {
             sys.setIgnitionSequence(3);
-        } else if (timeSinceIgnite >= IGNITION_SEQUENCE_THRESHOLD_1) {
-            sys.setIgnitionSequence(2);
-        }
+		} else if (sysStat.time - sysStat.lastFSMTransition >= IGNITION_SEQUENCE_THRESHOLD_1) {
+			sys.setIgnitionSequence(2);
+		}
 
         return IGNITION_STATE;
     }
+
     FSMState stateAscent() {
         if (shouldAbort()) {
             return ABORT_STATE;
@@ -176,27 +177,31 @@ protected:
 
         return targetAltitudeReached() ? HOVERING_STATE : ASCENT_STATE;
     }
+
     FSMState stateHovering() {
-        if (shouldAbort()) {
+        if (shouldAbort())
             return ABORT_STATE;
-        }
+
 
         return hoverStable() ? DESCENT_STATE : HOVERING_STATE;
     }
+
     FSMState stateDescent() {
-        if (shouldAbort()) {
+        if (shouldAbort())
             return ABORT_STATE;
-        }
+
 
         return touchdownReady() ? TOUCHDOWN_STATE : DESCENT_STATE;
     }
+
     FSMState stateTouchdown() {
-        if (shouldAbort()) {
+        if (shouldAbort())
             return ABORT_STATE;
-        }
+
 
         return TOUCHDOWN_STATE;
     }
+
     FSMState stateAbort()  {
         abortAll();
 
@@ -208,16 +213,20 @@ protected:
      * WARNING: the telecom is not reset
      */
     bool shouldAbort() {
+		bool isAbort = false;
+
         if(tele.isCommandUpdated() && tele.isCommand(CMD_AV_STATE)){
             FSMState nextState = tele.get().comId;
-            bool isAbort = nextState == ABORT_STATE;
-            if (isAbort) {
+			isAbort = (nextState == ABORT_STATE);
+
+            if (isAbort)
                 tele.reset();
-            }
-            return isAbort;
+
         }
-        return false;
+
+        return isAbort;
     }
+
 public:
 	FSMState getNextState() override {
 		switch (sys.get().state) {

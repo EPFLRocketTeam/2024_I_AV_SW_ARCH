@@ -16,6 +16,7 @@ protected:
 	SystemClass sys = SystemClass();
 public:
 	void loopOnce();
+
 	virtual time_millis_t getCurrentTimeMillis();
 	virtual FSMState getNextState();
 	virtual void update();

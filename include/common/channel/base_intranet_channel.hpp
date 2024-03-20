@@ -9,19 +9,36 @@
 #include "circular_buffer.hpp"
 
 #define INTRANET_MAX_RAW_BUFFER_SIZE 2048
-#define INTRANET_MAX_PAYLOAD_SIZE 256
+#define INTRANET_DATA_SIZE 63
+#define INTRANET_PAYLOAD_SIZE (INTRANET_DATA_SIZE + 1)
+#define INTRANET_CSC_IDX INTRANET_DATA_SIZE
+
+#define INTRANET_RESERVE(n) uint8_t reserved[n];
+#define INTRANET_FREE(n) INTRANET_RESERVE(INTRANET_DATA_SIZE - n);
+
+
 #define INTRANET_METADATA_BYTES 3
 
-struct IntranetPacket {
+struct intranet_packet_t {
 	uint8_t id;
-	uint8_t len;
-	uint8_t csc;
-	uint8_t payload[INTRANET_MAX_PAYLOAD_SIZE];
+	union packet_data_t {
+		uint8_t payload[INTRANET_PAYLOAD_SIZE];
+
+		struct sensor_packet_t {
+			uint8_t sensorId;
+			float x;
+			float y;
+			float z;
+			bool valid;
+			INTRANET_FREE(1+3*2+1)
+			uint8_t csc;
+		} sensor_packet;
+
+	} data;
 };
 
 enum IntranetParserState : uint8_t {
 	ID,
-	LEN,
 	PAYLOAD,
 	CSC,
 };
@@ -36,20 +53,20 @@ enum IntranetParserState : uint8_t {
   * \n\n
  * Write operations are dependant on the master/slave role of the board. A buffer system similar to read operations is available.
  */
-class BaseIntranetChannel : public BaseDataChannel<IntranetPacket> {
+class BaseIntranetChannel : public BaseDataChannel<intranet_packet_t> {
 public:
 	void tick();
-	void writeSync(const IntranetPacket& packet);
+	void writeSync(const intranet_packet_t& packet);
 protected:
 	bool readAvailable();
 	bool writeAvailable();
 
 	void decode();
 
-	virtual void onRead(const IntranetPacket& packet) = 0;
+	virtual void onRead(const intranet_packet_t& packet) = 0;
 
-	IntranetPacket fromBytes(uint8_t* bytesIn, uint32_t lenIn) override;
-	uint32_t toBytes(const IntranetPacket& packetIn, uint8_t* bytesOut) override;
+	intranet_packet_t fromBytes(uint8_t* bytesIn, uint32_t lenIn) override;
+	uint32_t toBytes(const intranet_packet_t& packetIn, uint8_t* bytesOut) override;
 
 protected:
 	CircularBuffer<INTRANET_MAX_RAW_BUFFER_SIZE> readBuffer;
@@ -59,9 +76,7 @@ protected:
 	uint8_t parserPayloadIdx = 0;
 
 	uint8_t id{};
-	uint8_t len{};
-	uint8_t csc{};
-	uint8_t payload[INTRANET_MAX_PAYLOAD_SIZE]{};
+	uint8_t payload[INTRANET_PAYLOAD_SIZE]{};
 
 	uint8_t computeCSC();
 };

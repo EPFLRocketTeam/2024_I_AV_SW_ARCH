@@ -57,7 +57,7 @@ void BaseIntranetChannel::decode() {
 uint8_t BaseIntranetChannel::computeCSC() {
 	uint8_t u = id;
 
-	for(uint32_t i = 0; i < INTRANET_RAW_SIZE; i++)
+	for(uint32_t i = 0; i < INTRANET_DATA_SIZE; i++) // not iterate over last byte since it's the csc
 		u += payload[i];
 
 	return u;

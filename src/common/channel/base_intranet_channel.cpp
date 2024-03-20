@@ -34,7 +34,7 @@ void BaseIntranetChannel::decode() {
 		case ID:
 			id = byte;
 			parserState = PAYLOAD;
-			memset(payload, 0, INTRANET_PAYLOAD_SIZE);
+			memset(payload, 0, INTRANET_RAW_SIZE);
 			break;
 		case PAYLOAD:
 			payload[parserPayloadIdx++] = byte;
@@ -48,7 +48,7 @@ void BaseIntranetChannel::decode() {
 			if(payload[INTRANET_CSC_IDX] == computeCSC()) {
 				intranet_packet_t packet{};
 				packet.id = id;
-				memmove(packet.data.raw, payload, INTRANET_PAYLOAD_SIZE);
+				memmove(packet.data.raw, payload, INTRANET_RAW_SIZE);
 				onRead(packet);
 			}
 			parserState = ID;
@@ -71,7 +71,7 @@ intranet_packet_t BaseIntranetChannel::fromBytes(uint8_t *bytesIn, uint32_t lenI
 
 	intranet_packet_t packet{};
 	packet.id = bytesIn[0];
-	memcpy(packet.data.raw, &(bytesIn[1]), INTRANET_PAYLOAD_SIZE);
+	memcpy(packet.data.raw, &(bytesIn[1]), INTRANET_RAW_SIZE);
 
 	return packet;
 }
@@ -83,7 +83,7 @@ uint32_t BaseIntranetChannel::toBytes(const intranet_packet_t &packetIn, uint8_t
 	bytesOut = new uint8_t[sizeof(intranet_packet_t)];
 
 	bytesOut[0] = packetIn.id;
-	memcpy(&(bytesOut[1]), packetIn.data.raw, INTRANET_PAYLOAD_SIZE);
+	memcpy(&(bytesOut[1]), packetIn.data.raw, INTRANET_RAW_SIZE);
 
-	return 1 + INTRANET_PAYLOAD_SIZE;
+	return 1 + INTRANET_RAW_SIZE;
 }

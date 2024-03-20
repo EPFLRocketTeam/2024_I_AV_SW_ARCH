@@ -10,7 +10,7 @@
 
 #define INTRANET_MAX_RAW_BUFFER_SIZE 2048
 #define INTRANET_DATA_SIZE 63
-#define INTRANET_PAYLOAD_SIZE (INTRANET_DATA_SIZE + 1)
+#define INTRANET_RAW_SIZE (INTRANET_DATA_SIZE + 1)
 #define INTRANET_CSC_IDX INTRANET_DATA_SIZE
 
 #define INTRANET_RESERVE(n) uint8_t reserved[n];
@@ -19,7 +19,7 @@
 struct intranet_packet_t {
 	uint8_t id;
 	union packet_data_t {
-		uint8_t raw[INTRANET_PAYLOAD_SIZE];
+		uint8_t raw[INTRANET_RAW_SIZE];
 
 		struct void_packet_t { // ID = 0
 			INTRANET_FREE(0);

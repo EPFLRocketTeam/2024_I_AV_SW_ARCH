@@ -16,13 +16,10 @@
 #define INTRANET_RESERVE(n) uint8_t reserved[n];
 #define INTRANET_FREE(n) INTRANET_RESERVE(INTRANET_DATA_SIZE - n);
 
-
-#define INTRANET_METADATA_BYTES 3
-
 struct intranet_packet_t {
 	uint8_t id;
 	union packet_data_t {
-		uint8_t payload[INTRANET_PAYLOAD_SIZE];
+		uint8_t raw[INTRANET_PAYLOAD_SIZE];
 
 		struct void_packet_t { // ID = 0
 			INTRANET_FREE(0);

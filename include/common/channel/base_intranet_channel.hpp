@@ -24,7 +24,12 @@ struct intranet_packet_t {
 	union packet_data_t {
 		uint8_t payload[INTRANET_PAYLOAD_SIZE];
 
-		struct sensor_packet_t {
+		struct void_packet_t { // ID = 0
+			INTRANET_FREE(0);
+			uint8_t csc;
+		} void_packet;
+
+		struct sensor_response_packet_t { // ID = 1
 			uint8_t sensorId;
 			float x;
 			float y;
@@ -32,7 +37,7 @@ struct intranet_packet_t {
 			bool valid;
 			INTRANET_FREE(1+3*2+1)
 			uint8_t csc;
-		} sensor_packet;
+		} sensor_response;
 
 	} data;
 };

@@ -13,8 +13,6 @@ void BaseIntranetChannel::tick(){
 }
 
 void BaseIntranetChannel::writeSync(const intranet_packet_t &packet) {
-	writeBuffer.pushBack(packet.id);
-
 	for(unsigned char p : packet.data.raw)
 		writeBuffer.pushBack(p);
 }
@@ -57,9 +55,9 @@ void BaseIntranetChannel::decode() {
 }
 
 uint8_t BaseIntranetChannel::computeCSC() {
-	uint8_t u = 0;
+	uint8_t u = id;
 
-	for(uint32_t i = 0; i < INTRANET_DATA_SIZE; i++)
+	for(uint32_t i = 0; i < INTRANET_RAW_SIZE; i++)
 		u += payload[i];
 
 	return u;

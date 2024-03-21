@@ -78,7 +78,7 @@ protected:
 	uint8_t parserPayloadIdx = 0;
 
 	uint8_t id{};
-	uint8_t payload[INTRANET_PAYLOAD_SIZE]{};
+	uint8_t payload[INTRANET_RAW_SIZE]{};
 
 	uint8_t computeCSC();
 };

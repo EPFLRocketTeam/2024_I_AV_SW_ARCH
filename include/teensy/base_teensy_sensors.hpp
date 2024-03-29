@@ -4,66 +4,80 @@
 
 #include <cstdint>
 #include "channel/base_data_channel.hpp"
-#include "channel/sensor_data.hpp"
 
+struct SensorData {
+    float pollingRate;
+    uint8_t id;
+    union sensor_calibration_data {
+        struct bno_calibration_t { // ID = 0 is for BNO
+            float mean;
+            float variance;
+        } bnoCalibration;
 
+        struct bmp_calibration_t { // ID = 1 is for BMP
+            float mean[3];
+            float variance[3];
+        } bmpCalibration ;
 
-template<class I2CInterface, class BNOSensor, class BMPSensor, class GNSSSensor, typename Packet>
-class BaseTeensySensors : public virtual BaseDataChannel<Packet> {
+        struct gnss_calibration_t { // ID = 2 is for BMP
+
+        } gnssCalibration;
+
+    } data;
+};
+
+enum SENSOR_TYPE {
+    BNO,
+    BMP,
+    GNSS
+};
+
+template<class I2CInterface, class BNOSensor, class BMPSensor, class GNSSSensor>
+class BaseTeensySensors {
 public:
-    void initializeDrivers() {
-        i2CInterface.begin();
-        bno.init();
-        bmp.init();
-        gnss.init();
+    BaseTeensySensors(BNOSensor* bnoSensorIn, BMPSensor* bmpSensorIn, GNSSSensor* gnssSensorIn, I2CInterface* i2CInterfaceIn) {
+        gnss = gnssSensorIn;
+        bmp = bmpSensorIn;
+        bno = bnoSensorIn;
+        i2CInterface = i2CInterfaceIn;
     }
-    void tick();
+
+    virtual void initializeDrivers() = 0;
+    virtual void tick() = 0;
     SensorData getSensorData(SENSOR_TYPE sensorType) {
         switch (sensorType) {
             case BNO:
-                return bnoData.get();
+                return bnoData;
             case BMP:
-                return bmpData.get();
+                return bmpData;
             case GNSS:
-                return gnssData.get();
+                return gnssData;
         }
     }
-    void calibrate(SENSOR_TYPE sensorType);
-    void setPollingRate(SENSOR_TYPE sensorType, int pollingRateIn) {
-        switch (sensorType) {
-            case BNO:
-                bnoData.setPollingRate(pollingRateIn);
-                return ;
-            case BMP:
-                bmpData.setPollingRate(pollingRateIn);
-                return;
-            case GNSS:
-                gnssData.setPollingRate(pollingRateIn);
-                return;
-        }
-    }
+    virtual void calibrate(SENSOR_TYPE sensorType) = 0;
 
 
 protected:
-    void setMean(SENSOR_TYPE sensorType, float meanIn) {
-        switch (sensorType) {
-            case BNO:
-                return bnoData.setMean(meanIn);
-            case BMP:
-                return bmpData.setMean(meanIn);
-            case GNSS:
-                return gnssData.setMean(meanIn);
-        }
+    void setMeanBNO(float meanIn) {
+        bnoData.data.bnoCalibration.mean = meanIn;
     }
-    void setVariance(SENSOR_TYPE sensorType, float varianceIn) {
-        switch (sensorType) {
-            case BNO:
-                return bnoData.setVariance(varianceIn);
-            case BMP:
-                return bmpData.setVariance(varianceIn);
-            case GNSS:
-                return gnssData.setVariance(varianceIn);
-        }
+    void setMeanBMP(float meanXIn, float meanYIn, float meanZIn) {
+        bnoData.data.bmpCalibration.mean[0] = meanXIn;
+        bnoData.data.bmpCalibration.mean[1] = meanYIn;
+        bnoData.data.bmpCalibration.mean[2] = meanZIn;
+    }
+    void setMeanGNSS() {
+    }
+
+    void setVarianceBNO(float varianceIn) {
+        bnoData.data.bnoCalibration.variance = varianceIn;
+    }
+    void setVarianceBMP(float varianceXIn, float varianceYIn, float varianceZIn) {
+        bnoData.data.bmpCalibration.variance[0] = varianceXIn;
+        bnoData.data.bmpCalibration.variance[1] = varianceYIn;
+        bnoData.data.bmpCalibration.variance[2] = varianceZIn;
+    }
+    void setVarianceGNSS() {
     }
 
     virtual int8_t readRawSensorData(SENSOR_TYPE sensorType);
@@ -78,8 +92,16 @@ protected:
     BMPSensor* bmp;
     GNSSSensor* gnss;
 
-    SensorDataClass bnoData = SensorDataClass();
-    SensorDataClass bmpData = SensorDataClass();
-    SensorDataClass gnssData = SensorDataClass();
-
+    SensorData bnoData = {
+            .pollingRate = 0,
+            .id = 0,
+    };
+    SensorData bmpData = {
+            .pollingRate = 0,
+            .id = 1
+    };
+    SensorData gnssData = {
+            .pollingRate = 0,
+            .id = 2
+    };
 };

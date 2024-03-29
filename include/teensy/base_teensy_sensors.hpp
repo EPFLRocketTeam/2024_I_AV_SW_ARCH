@@ -21,47 +21,56 @@ public:
     SensorData getSensorData(SENSOR_TYPE sensorType) {
         switch (sensorType) {
             case BNO:
-                return bnoCalibrationData.get();
+                return bnoData.get();
             case BMP:
-                return bmpCalibrationData.get();
+                return bmpData.get();
             case GNSS:
-                return gnssCalibrationData.get();
+                return gnssData.get();
         }
     }
     void calibrate(SENSOR_TYPE sensorType);
+    void setPollingRate(SENSOR_TYPE sensorType, int pollingRateIn) {
+        switch (sensorType) {
+            case BNO:
+                bnoData.setPollingRate(pollingRateIn);
+                return ;
+            case BMP:
+                bmpData.setPollingRate(pollingRateIn);
+                return;
+            case GNSS:
+                gnssData.setPollingRate(pollingRateIn);
+                return;
+        }
+    }
 
 
 protected:
     void setMean(SENSOR_TYPE sensorType, float meanIn) {
         switch (sensorType) {
             case BNO:
-                return bnoCalibrationData.setMean(meanIn);
+                return bnoData.setMean(meanIn);
             case BMP:
-                return bmpCalibrationData.setMean(meanIn);
+                return bmpData.setMean(meanIn);
             case GNSS:
-                return gnssCalibrationData.setMean(meanIn);
+                return gnssData.setMean(meanIn);
         }
     }
     void setVariance(SENSOR_TYPE sensorType, float varianceIn) {
         switch (sensorType) {
             case BNO:
-                return bnoCalibrationData.setVariance(varianceIn);
+                return bnoData.setVariance(varianceIn);
             case BMP:
-                return bmpCalibrationData.setVariance(varianceIn);
+                return bmpData.setVariance(varianceIn);
             case GNSS:
-                return gnssCalibrationData.setVariance(varianceIn);
+                return gnssData.setVariance(varianceIn);
         }
     }
-    void setPollingRate(SENSOR_TYPE sensorType, int pollingRateIn) {
-        switch (sensorType) {
-            case BNO:
-                return bnoCalibrationData.setPollingRate(pollingRateIn);
-            case BMP:
-                return bmpCalibrationData.setPollingRate(pollingRateIn);
-            case GNSS:
-                return gnssCalibrationData.setPollingRate(pollingRateIn);
-        }
-    }
+
+    virtual int8_t readRawSensorData(SENSOR_TYPE sensorType);
+    
+    virtual int8_t readCalibratedSensorData(SENSOR_TYPE sensorType);
+    
+    virtual int8_t applyCalibration(SensorData calibrationData, int8_t dataIn);
 
 protected:
     I2CInterface* i2CInterface;

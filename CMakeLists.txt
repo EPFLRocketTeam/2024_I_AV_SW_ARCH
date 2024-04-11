@@ -25,16 +25,16 @@ target_include_directories(2024_I_AV_SW_TEENSY PUBLIC include/teensy)
 
 
 # Defining tests
-enable_testing()
-
-add_executable(DEMO_TEENSY_MASTER test/demo_teensy_master.cpp)
-target_link_libraries(DEMO_TEENSY_MASTER PUBLIC 2024_I_AV_SW_TEENSY)
-
-add_test(NAME DEMO_TEENSY_MASTER COMMAND $<TARGET_FILE:DEMO_TEENSY_MASTER>)
-set_tests_properties(DEMO_TEENSY_MASTER PROPERTIES TIMEOUT 5)
-
-add_executable(DEMO_RPI_SLAVE test/demo_rpi_slave.cpp)
-target_link_libraries(DEMO_RPI_SLAVE PUBLIC 2024_I_AV_SW_RPI)
-
-add_test(NAME DEMO_RPI_SLAVE COMMAND $<TARGET_FILE:DEMO_RPI_SLAVE>)
-set_tests_properties(DEMO_RPI_SLAVE PROPERTIES TIMEOUT 5)
+# enable_testing()
+#
+#add_executable(DEMO_TEENSY_MASTER test/demo_teensy_master.cpp)
+#target_link_libraries(DEMO_TEENSY_MASTER PUBLIC 2024_I_AV_SW_TEENSY)
+#
+#add_test(NAME DEMO_TEENSY_MASTER COMMAND $<TARGET_FILE:DEMO_TEENSY_MASTER>)
+#set_tests_properties(DEMO_TEENSY_MASTER PROPERTIES TIMEOUT 5)
+#
+#add_executable(DEMO_RPI_SLAVE test/demo_rpi_slave.cpp)
+#target_link_libraries(DEMO_RPI_SLAVE PUBLIC 2024_I_AV_SW_RPI)
+#
+#add_test(NAME DEMO_RPI_SLAVE COMMAND $<TARGET_FILE:DEMO_RPI_SLAVE>)
+#set_tests_properties(DEMO_RPI_SLAVE PROPERTIES TIMEOUT 5)

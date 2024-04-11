@@ -9,9 +9,9 @@
 template<class I2CInterface, typename SensorSetData, typename SensorSetCalibration>
 class BaseTeensySensors {
 public:
-    BaseTeensySensors(I2CInterface* i2cIn) : i2c(i2cIn) {}
-    virtual void init() = 0;
+    explicit BaseTeensySensors(I2CInterface* i2cIn) : i2c(i2cIn) {}
 
+    virtual void init() = 0;
     virtual void tick() = 0;
     virtual void calibrate() = 0;
 

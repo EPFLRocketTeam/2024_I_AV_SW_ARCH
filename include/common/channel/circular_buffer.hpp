@@ -5,6 +5,8 @@
 #ifndef INC_2024_I_AV_SW_CIRCULAR_BUFFER_HPP
 #define INC_2024_I_AV_SW_CIRCULAR_BUFFER_HPP
 
+#include <cstdint>
+
 template<size_t MAX_SIZE>
 class CircularBuffer {
 private:

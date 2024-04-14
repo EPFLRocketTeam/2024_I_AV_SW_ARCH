@@ -18,8 +18,7 @@ target_link_libraries(2024_I_AV_SW_RPI PUBLIC 2024_I_AV_SW_COMMON)
 target_include_directories(2024_I_AV_SW_RPI PUBLIC include/rpi)
 
 # Library for the Teensy
-add_library(2024_I_AV_SW_TEENSY include/teensy/base_teensy_board.hpp include/teensy/base_teensy_telecom.hpp
-        include/teensy/base_teensy_sensors.hpp)
+add_library(2024_I_AV_SW_TEENSY include/teensy/base_teensy_board.hpp include/teensy/base_teensy_telecom.hpp include/teensy/base_teensy_sensors.hpp)
 target_link_libraries(2024_I_AV_SW_TEENSY PUBLIC 2024_I_AV_SW_COMMON)
 target_include_directories(2024_I_AV_SW_TEENSY PUBLIC include/teensy)
 

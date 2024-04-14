@@ -5,7 +5,7 @@
 #ifndef INC_2024_I_AV_SW_BASE_TEENSY_TELECOM_HPP
 #define INC_2024_I_AV_SW_BASE_TEENSY_TELECOM_HPP
 
-#include <cstdint>
+#include <stdint.h>
 #include "channel/base_data_channel.hpp"
 #include "channel/modifier/command_handler.hpp"
 

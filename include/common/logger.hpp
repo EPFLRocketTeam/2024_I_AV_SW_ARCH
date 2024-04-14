@@ -5,8 +5,12 @@
 #ifndef INC_2024_I_AV_SW_LOGGER_HPP
 #define INC_2024_I_AV_SW_LOGGER_HPP
 
+#ifndef NO_IOSTREAM
 #include <iostream>
 
 #define LOG(x) std::cout << x << std::endl
+#elif
+#define LOG(x)
+#endif
 
 #endif //INC_2024_I_AV_SW_LOGGER_HPP

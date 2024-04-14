@@ -6,7 +6,7 @@
 #define INC_2024_I_AV_SW_BASE_BOARD_HPP
 
 
-#include "core/system.hpp"
+#include "common/core/system.hpp"
 
 /**
  * BaseBoardClass is the interface from which all board derive. To run the board, one must first call <strong>init</strong> then put <strong>loopOnce</strong> in an infinite loop

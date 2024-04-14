@@ -5,8 +5,8 @@
 #ifndef INC_2024_I_AV_SW_SYSTEM_HPP
 #define INC_2024_I_AV_SW_SYSTEM_HPP
 
-#include "core/fsm.hpp"
-#include "types.hpp"
+#include "common/core/fsm.hpp"
+#include "common/types.hpp"
 
 /**
  * @var time: time at the beginning of each cycle

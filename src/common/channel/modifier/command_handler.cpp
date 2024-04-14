@@ -2,14 +2,14 @@
 // Created by Samuel on 04/02/2024.
 //
 
-#include "channel/modifier/command_handler.hpp"
+#include "common/channel/modifier/command_handler.hpp"
 
 bool CommandHandler::isCommandUpdated() {
 	return comId != lastComId;
 }
 
 bool CommandHandler::isCommand(CommandID id) {
-	return comId = id;
+	return comId == id;
 }
 
 void CommandHandler::resetCommand() {

@@ -5,9 +5,9 @@
 #ifndef INC_2024_I_AV_SW_CIRCULAR_BUFFER_HPP
 #define INC_2024_I_AV_SW_CIRCULAR_BUFFER_HPP
 
-#include <cstdint>
+#include <stdint.h>
 
-template<size_t MAX_SIZE>
+template<uint32_t MAX_SIZE>
 class CircularBuffer {
 private:
 	uint8_t buffer[MAX_SIZE];
@@ -21,14 +21,14 @@ public:
 	bool isDataAvailable();
 };
 
-template<size_t MAX_SIZE>
+template<uint32_t MAX_SIZE>
 void CircularBuffer<MAX_SIZE>::pushBack(const uint8_t &byte) {
 	buffer[tail] = byte;
 	tail = (tail + 1) & (MAX_SIZE - 1);
 	size++;
 }
 
-template<size_t MAX_SIZE>
+template<uint32_t MAX_SIZE>
 uint8_t CircularBuffer<MAX_SIZE>::popFront() {
 	uint8_t byte = buffer[head];
 	head = (head + 1) & (MAX_SIZE - 1);
@@ -36,7 +36,7 @@ uint8_t CircularBuffer<MAX_SIZE>::popFront() {
 	return byte;
 }
 
-template<size_t MAX_SIZE>
+template<uint32_t MAX_SIZE>
 bool CircularBuffer<MAX_SIZE>::isDataAvailable() {
 	return size > 0;
 }

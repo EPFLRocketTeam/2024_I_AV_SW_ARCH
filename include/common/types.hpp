@@ -5,7 +5,7 @@
 #ifndef INC_2024_I_AV_SW_TYPES_HPP
 #define INC_2024_I_AV_SW_TYPES_HPP
 
-#include <cstdint>
+#include <stdint.h>
 
 typedef uint32_t time_millis_t;
 

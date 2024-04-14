@@ -2,8 +2,8 @@
 // Created by Samuel on 04/02/2024.
 //
 
-#include "core/base_board.hpp"
-#include "logger.hpp"
+#include "common/core/base_board.hpp"
+#include "common/logger.hpp"
 
 void BaseBoardClass::loopOnce() {
 	sys.setTime(getCurrentTimeMillis());												// UPDATE TIME REF

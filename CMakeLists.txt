@@ -10,17 +10,17 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -ggdb")
 
 # Library for Common Things
 add_library(2024_I_AV_SW_COMMON include/common/core/system.hpp src/common/core/system.cpp include/common/core/fsm.hpp include/common/logger.hpp src/common/core/base_board.cpp include/common/core/base_board.hpp include/common/channel/modifier/command_handler.hpp src/common/channel/modifier/command_handler.cpp include/common/types.hpp include/common/channel/base_data_channel.hpp include/common/channel/base_intranet_channel.hpp include/common/channel/circular_buffer.hpp src/common/channel/base_intranet_channel.cpp)
-target_include_directories(2024_I_AV_SW_COMMON PUBLIC include/common)
+target_include_directories(2024_I_AV_SW_COMMON PUBLIC include)
 
 # Library for the RPI
 add_library(2024_I_AV_SW_RPI include/rpi/base_rpi_board.hpp)
 target_link_libraries(2024_I_AV_SW_RPI PUBLIC 2024_I_AV_SW_COMMON)
-target_include_directories(2024_I_AV_SW_RPI PUBLIC include/rpi)
+target_include_directories(2024_I_AV_SW_RPI PUBLIC include)
 
 # Library for the Teensy
 add_library(2024_I_AV_SW_TEENSY include/teensy/base_teensy_board.hpp include/teensy/base_teensy_telecom.hpp include/teensy/base_teensy_sensors.hpp)
 target_link_libraries(2024_I_AV_SW_TEENSY PUBLIC 2024_I_AV_SW_COMMON)
-target_include_directories(2024_I_AV_SW_TEENSY PUBLIC include/teensy)
+target_include_directories(2024_I_AV_SW_TEENSY PUBLIC include)
 
 
 # Defining tests

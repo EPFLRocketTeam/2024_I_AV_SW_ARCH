@@ -2,9 +2,8 @@
 // Created by Philip on 27/03/2024.
 //
 
-#include <cstdint>
-#include <cstdlib>
-#include "channel/base_data_channel.hpp"
+#include <stdint.h>
+#include "common/channel/base_data_channel.hpp"
 
 template<class I2CInterface, typename SensorSetData, typename SensorSetCalibration>
 class BaseTeensySensors {

@@ -5,7 +5,7 @@
 #ifndef INC_2024_I_AV_SW_COMMAND_HANDLER_HPP
 #define INC_2024_I_AV_SW_COMMAND_HANDLER_HPP
 
-#include "types.hpp"
+#include "common/types.hpp"
 
 class CommandHandler {
 protected:

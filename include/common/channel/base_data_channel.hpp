@@ -5,7 +5,7 @@
 #ifndef INC_2024_I_AV_SW_BASE_DATA_CHANNEL_HPP
 #define INC_2024_I_AV_SW_BASE_DATA_CHANNEL_HPP
 
-#include <cstdint>
+#include <stdint.h>
 
 /**
  * BaseDataChannel is the interface describing all potential communication channels within the AV and with external Systems.

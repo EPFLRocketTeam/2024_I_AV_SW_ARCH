@@ -2,7 +2,7 @@
 // Created by Samuel on 04/02/2024.
 //
 
-#include "core/system.hpp"
+#include "common/core/system.hpp"
 
 SystemStatus SystemClass::get() {
 	return SystemStatus {

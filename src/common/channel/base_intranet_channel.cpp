@@ -2,8 +2,8 @@
 // Created by Samuel on 24/02/2024.
 //
 
-#include <cstring>
-#include "channel/base_intranet_channel.hpp"
+#include "common/channel/base_intranet_channel.hpp"
+#include <string.h>
 
 void BaseIntranetChannel::tick(){
 	// sync read from buffer

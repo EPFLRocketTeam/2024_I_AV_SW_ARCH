@@ -9,7 +9,8 @@
 #include <iostream>
 
 #define LOG(x) std::cout << x << std::endl
-#elif
+#endif
+#ifdef NO_IOSTREAM
 #define LOG(x)
 #endif
 
